@@ -1,0 +1,620 @@
+/* =========================
+   Section 3
+========================= */
+
+.section3-wrapper {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.title3 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding-left: 2.555vw;
+  padding-right: 2.555vw;
+  padding-top: 50px;
+
+  gap: 20px;
+}
+
+.section3-search-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  flex-wrap: wrap;
+}
+
+/* =========================
+   Select
+========================= */
+
+.section3-select {
+  height: 42px;
+
+  min-width: 130px;
+
+  padding: 0 12px;
+
+  border-radius: 12px;
+  border: 1px solid #ddd7f4;
+
+  background: #ffffff;
+  color: #29234d;
+
+  outline: none;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+  box-shadow: 0 4px 12px rgba(40, 30, 80, 0.08);
+
+  transition: 0.2s;
+}
+
+.section3-select:focus {
+  border-color: #6d5dfc;
+}
+
+/* =========================
+   Search input
+========================= */
+
+.section3-search-input {
+  width: 220px;
+  height: 42px;
+
+  box-sizing: border-box;
+
+  padding: 0 14px;
+
+  border-radius: 12px;
+
+  border: 1px solid #ddd7f4;
+
+  background: #ffffff;
+
+  color: #29234d;
+
+  outline: none;
+
+  font-size: 14px;
+
+  box-shadow: 0 4px 12px rgba(40, 30, 80, 0.08);
+
+  transition: 0.25s;
+}
+
+.section3-search-input:focus {
+  border-color: #6d5dfc;
+
+  box-shadow:
+    0 0 0 3px rgba(109, 93, 252, 0.12);
+}
+
+.section3-search-input::placeholder {
+  color: #aaa4bd;
+}
+
+/* =========================
+   Clear button
+========================= */
+
+.section3-clear {
+  width: 32px;
+  height: 32px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: #eeeafd;
+
+  color: #6d5dfc;
+
+  font-size: 22px;
+
+  cursor: pointer;
+
+  margin-left: -50px;
+
+  z-index: 2;
+}
+
+/* =========================
+   Search result information
+========================= */
+
+.search-result-info {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 15px;
+
+  margin-top: 25px;
+  margin-bottom: 5px;
+}
+
+/* =========================
+   View All search button
+========================= */
+
+.view-all-search-btn {
+  border: none;
+
+  padding: 9px 17px;
+
+  border-radius: 10px;
+
+  background: #6d5dfc;
+
+  color: white;
+
+  font-size: 13px;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.view-all-search-btn:hover {
+  background: #5848e8;
+
+  transform: translateY(-2px);
+}
+
+/* =========================
+   No results
+========================= */
+
+.no-search-results {
+  text-align: center;
+
+  margin-top: 50px;
+  margin-bottom: 40px;
+
+  font-size: 17px;
+
+  color: #77728c;
+}
+
+/* =========================
+   Slider
+========================= */
+
+.sec33 {
+  width: 100%;
+}
+
+.slider-container {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 0 2%;
+}
+
+/* =========================
+   Card
+========================= */
+
+.card {
+  width: 220px;
+  height: 390px;
+
+  margin: 50px auto;
+
+  background: #ffffff;
+  color: #24213a;
+
+  border-radius: 18px;
+
+  padding: 12px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #e5e1f2;
+
+  box-shadow:
+    0 5px 18px rgba(40, 30, 80, 0.10);
+
+  display: flex;
+  flex-direction: column;
+
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-7px);
+
+  box-shadow:
+    0 10px 25px rgba(40, 30, 80, 0.16);
+}
+
+/* =========================
+   Image
+========================= */
+
+.card__image {
+  width: 100%;
+  height: 210px;
+
+  background: #f4f1ff;
+
+  border-radius: 13px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+}
+
+.card__image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+}
+
+/* =========================
+   Text
+========================= */
+
+.card__text {
+  margin-top: 12px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 6px;
+
+  flex: 1;
+
+  overflow: hidden;
+}
+
+.card__title {
+  color: #29234d;
+
+  font-size: 17px;
+
+  font-weight: bold;
+
+  margin: 0;
+}
+
+.card__description {
+  color: #77728c;
+
+  font-size: 12px;
+
+  line-height: 1.5;
+
+  margin: 0;
+
+  overflow: hidden;
+}
+
+/* =========================
+   Footer
+========================= */
+
+.card__footer {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+}
+/* =========================
+   Read More
+========================= */
+
+.card__button {
+  width: 100%;
+  height: 40px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  background: #6d5dfc;
+
+  color: white;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.card__button:hover {
+  background: #5848e8;
+}
+
+/* =========================
+   Actions
+========================= */
+
+.card-actions {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 0 5px;
+}
+
+.card-like {
+  display: flex;
+
+  align-items: center;
+
+  gap: 5px;
+}
+
+.card-like img {
+  width: 24px !important;
+  height: 24px !important;
+
+  cursor: pointer;
+
+  object-fit: contain;
+}
+
+.card-like-count {
+  color: #77728c;
+
+  font-size: 12px;
+
+  margin: 0;
+}
+
+/* =========================
+   Save
+========================= */
+
+.card-save {
+  width: 32px;
+  height: 32px;
+
+  border-radius: 9px;
+
+  background: #f0edff;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  cursor: pointer;
+}
+
+.card-save img {
+  width: 19px !important;
+  height: 19px !important;
+
+  object-fit: contain;
+}
+
+/* =========================
+   Dark Mode
+========================= */
+
+.dark-card {
+  background: #292929;
+
+  color: #ffffff;
+
+  border-color: #3d3d3d;
+
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.dark-card .card__image {
+  background: #ffffff;
+}
+
+.dark-card .card__title {
+  color: #ffffff;
+}
+
+.dark-card .card__description {
+  color: #d0d0d0;
+}
+
+.dark-card .card-like-count {
+  color: #d0d0d0;
+}
+
+.dark-card .card-save {
+  background: #ffffff;
+}
+
+.dark-card .card__button {
+  background: #8b7cff;
+
+  color: #ffffff;
+}
+
+.dark-card .card__button:hover {
+  background: #7667ed;
+}
+
+/* =========================
+   Mobile
+========================= */
+
+@media screen and (max-width: 600px) {
+
+  .title3 {
+    flex-direction: column;
+
+    align-items: stretch;
+
+    padding-left: 15px;
+    padding-right: 15px;
+
+    padding-top: 30px;
+  }
+
+  .section3-search-area {
+    justify-content: center;
+  }
+
+  .section3-search-area h2 {
+    width: 100%;
+
+    text-align: center;
+  }
+
+  .section3-select {
+    width: 125px;
+  }
+
+  .section3-search-input {
+    width: 180px;
+  }
+
+  .view {
+    text-align: center;
+  }
+
+  .card {
+    width: 165px;
+
+    height: 350px;
+
+    padding: 9px;
+  }
+
+  .card__image {
+    height: 175px;
+  }
+
+  .card__title {
+    font-size: 14px;
+  }
+
+  .card__description {
+    font-size: 10px;
+  }
+
+  .card__button {
+    height: 36px;
+
+    font-size: 12px;
+  }
+
+  .search-result-info {
+    flex-direction: column;
+  }
+}
+/* =========================
+   بحث Section 3
+========================= */
+
+.section3-search-input {
+  width: 190px;
+  height: 38px;
+
+  border: 1px solid #d8d1ed;
+  border-radius: 12px;
+
+  padding: 0 12px;
+
+  outline: none;
+
+  background: white;
+  color: #29234d;
+
+  font-size: 14px;
+
+  box-sizing: border-box;
+
+  transition: 0.3s;
+}
+
+.section3-search-input:focus {
+  border-color: #6d5dfc;
+
+  box-shadow:
+    0 0 0 3px rgba(109, 93, 252, 0.12);
+}
+
+.section3-results {
+  width: 100%;
+}
+
+.section3-result-header {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 10px 2.555vw;
+
+  gap: 15px;
+}
+
+.section3-view-all {
+  border: none;
+
+  border-radius: 10px;
+
+  padding: 9px 16px;
+
+  background: #6d5dfc;
+
+  color: white;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.section3-view-all:hover {
+  background: #5848e8;
+
+  transform: translateY(-2px);
+}
+
+.section3-no-results {
+  text-align: center;
+
+  padding: 35px;
+
+  font-size: 17px;
+}
+
+@media screen and (max-width: 600px) {
+
+  .section3-search-input {
+    width: 150px;
+
+    height: 35px;
+
+    font-size: 12px;
+  }
+
+  .section3-result-header {
+    flex-direction: column;
+
+    align-items: center;
+  }
+
+}

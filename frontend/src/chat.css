@@ -1,0 +1,17 @@
+.chatbutton:hover{
+    transform: translateY(-1.6px);
+    background-color: rgb(213, 216, 219) !important;
+}
+.hide-scrollbar {
+  overflow-y: auto;
+
+  
+  scrollbar-width: none;
+
+ 
+  -ms-overflow-style: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; 
+}

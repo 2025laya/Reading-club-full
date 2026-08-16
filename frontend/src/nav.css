@@ -1,0 +1,10 @@
+.nav-link:hover{
+background-color: #744ba097;
+box-shadow: -10px -8px 20px 3px #1c1509;
+}
+.nav-link{
+    
+border-radius:25px;
+margin-right: 10px;
+
+}

@@ -1,0 +1,11 @@
+.comments-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+
+.comment-card {
+  width: 100%;
+  box-sizing: border-box;
+}

@@ -1,0 +1,75 @@
+.button1:hover{
+    transition: 0.5s;
+    transform: translateY(-7px);
+  
+}
+
+
+@media screen and (max-width:992px){
+p{
+    font-size: 15px !important;
+}
+h1{
+    font-size: 40px !important;
+}
+.button1{
+font-size: 12px !important;
+}
+.element{
+   display: none;
+}
+
+
+}
+
+@media screen and (max-width:587px){
+p{
+    font-size: 15px !important;
+}
+h1{
+    font-size: 30px !important;
+}
+.button1{
+font-size: 12px !important;
+padding:20px !important;
+}
+.element{
+   display: none;
+}
+
+}
+
+
+@media screen and (max-width:430px){
+ p{
+    font-size: 18px !important;
+}
+h1{
+    font-size: 30px !important;
+}
+.button1{
+font-size: 12px !important;
+padding:20px !important;
+}
+.element{
+   display: none;
+}
+
+
+}
+
+@media screen and (max-width:400px){
+ p{
+    font-size: 15px !important;
+}
+h1{
+    font-size: 25px !important;
+}
+.button1{
+font-size: 10px !important;
+padding:20px !important;
+}
+.element{
+   display: none;
+}
+}

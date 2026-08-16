@@ -1,0 +1,97 @@
+ @font-face {
+  font-family: 'caveatfont'; 
+  src: url('./fonts/Caveat-Bold.ttf');
+}
+  @font-face {
+  font-family: 'playpen'; 
+  src: url('./fonts/PlaypenSans-Medium.ttf');
+}
+
+input{
+ 
+    border-radius: 25px;
+    height: 25px;
+    padding: 15px;
+    opacity: 0.6;
+    color:rgb(16, 15, 15);
+     
+      
+}  
+.forminput{
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    gap:15px;
+}
+
+
+.login-button{
+    background-color: #E9D5FF;
+    margin-top: 11px;
+    border:none;
+    border-radius: 25px;
+    height:30px;
+    padding:20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    width:160px;
+    transition: 0.8s;
+}
+.login-button1{
+    background-color: #E9D5FF;
+    margin-top: 11px;
+    border:none;
+    border-radius: 25px;
+    height:50px;
+    padding:20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    width:160px;
+    transition: 0.8s;
+}
+.login{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #E9D5FF;
+  font-family: 'caveatfont'; 
+}
+
+.login-card {
+  background: rgb(213, 209, 209);
+  font-size: 17px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  border-radius: 10px;
+  box-shadow:-16px -16px 29px 11px #454443 ;
+  width: 100%;
+  max-width: 400px;
+  border:9px solid #736187 ;
+  animation-name: distance0;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+ 
+}
+
+.login-button:hover { background-color: hsl(309, 46%, 69%); transform: translateY(-3px);}
+.login-button1:hover { background-color: hsl(309, 46%, 69%); transform: translateY(-3px);}
+@keyframes distance0{
+  0%{
+ transform:translateY(0px);
+  }
+  50%{
+ transform:translateY(30px);
+  }
+  100%{
+    transform:translateY(0px);
+  }
+
+}
+ 

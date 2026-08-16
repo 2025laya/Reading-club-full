@@ -1,0 +1,217 @@
+@font-face {
+    font-family: 'LRegular';
+    src: url('./fonts/Lato-Regular.ttf');
+}
+ @font-face {
+  font-family: 'caveatfont'; 
+  src: url('./fonts/Caveat-Bold.ttf');
+}
+  @font-face {
+  font-family: 'playpen'; 
+  src: url('./fonts/PlaypenSans-Medium.ttf');
+}
+
+.para1{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 648px;
+    gap: 15px;
+}
+
+.par2{
+    font-family: "playpen";
+    font-size: 50px;
+    color: #6366F1;
+}
+
+.Butt{
+    display: flex;
+    flex-direction: row;
+    gap: 70px;
+}
+.button1{
+    font-family: 'playpen';
+    color: #1E1B4B;
+    background-color: rgb(221, 221, 221);
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
+    height: 40px;
+    width: 160px;
+    box-shadow: 0px 5px 5px 0px grey; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.button1:hover{
+    transition: 0.5s;
+    transform: translateY(-7px);
+    color: rgb(221, 221, 221);
+    background-color: #1E1B4B;
+}
+.photo11{
+   width: 30%;
+   animation-name: photo111;
+   animation-timing-function: linear;
+   animation-duration: 3s;
+   animation-iteration-count: infinite;
+}
+@keyframes photo111 {
+    0%{
+      transform: scale(0.4);
+    }
+    50%{
+      transform: scale(0.6);
+    }
+    100%{
+       transform: scale(0.4);
+    }
+}
+.photo22{
+   width: 30%;
+   animation-name: photo222;
+   animation-timing-function: linear;
+   animation-duration: 3s;
+   animation-iteration-count: infinite;
+}
+.title222{
+    font-size:40px !important;
+}
+@keyframes photo222 {
+    0%{
+      transform: scale(0.6);
+    }
+    50%{
+      transform: scale(0.4);
+    }
+    100%{
+       transform: scale(0.6);
+    }
+}
+.photo33{
+   animation-name: photo111;
+   animation-timing-function: linear;
+   animation-duration: 3s;
+   animation-iteration-count: infinite;
+}
+.photo44{
+    width: 33%;
+   animation-name: photo111;
+   animation-timing-function: linear;
+   animation-duration: 3s;
+   animation-iteration-count: infinite;
+}
+.photo55{
+    width: 30%;
+   animation-name: photo111;
+   animation-timing-function: linear;
+   animation-duration: 3s;
+   animation-iteration-count: infinite;
+}
+.ph14{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.ph25{
+    display: flex;
+    justify-content: space-between;
+    
+}
+@media screen and (max-width:1000px) {
+     .par1{
+      font-size: 25px !important;
+      width: 400px;
+    }
+    .par2{
+        font-size: 23px !important;
+    }
+    .par3{
+        font-size: 15px !important;
+    }
+    .para1{
+        height: 550px;
+    }
+    .button1{
+        width: 150px;
+        height: 35px;
+        font-size: 13px;
+    }
+    .photo11{
+    width: 25%;
+    height: 80%;
+    }
+    .photo22{
+    width: 25%;
+    height: 80%;
+    }
+    .photo44{
+    width: 25%;
+    height: 80%;
+    }
+    .photo55{
+    width: 25%;
+    height: 80%;
+    }
+    .title222{
+    font-size:30px !important;
+}
+}
+@media screen and (max-width:730px) {
+
+    .par1{
+      font-size: 20px !important;
+      width: 280px;
+    }
+    .par2{
+        font-size: 19px !important;
+    }
+    .par3{
+        font-size: 10px !important;
+    }
+    .para1{
+        height: 400px;
+    }
+    .button1{
+        width: 100px;
+        height: 30px;
+        font-size: 10px !important;
+        
+    }
+    .title222{
+    font-size:20px !important;
+}
+}
+@media screen and (max-width:580px) {
+    .par1{
+      font-size: 20px !important;
+    }
+    .par2{
+        font-size: 19px !important;
+    }
+    .par3{
+        font-size: 10px !important;
+    }
+    .para1{
+        height: 400px;
+    }
+    .photo11{
+    width: 20%;
+    height: 75%;
+    }
+    .photo22{
+    width: 20%;
+    height: 75%;
+    }
+    .photo44{
+    width: 20%;
+    height: 75%;
+    }
+    .photo55{
+    width: 20%;
+    height: 75%;
+    }
+
+}

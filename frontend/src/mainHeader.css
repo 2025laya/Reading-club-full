@@ -1,0 +1,10 @@
+@font-face {
+    font-family: 'playpen';
+    src: url('./fonts/PlaypenSans-Medium.ttf');
+}
+.Header{
+    display: flex;
+    font-family:'playpen';
+    justify-content:space-around;
+    align-items:center;
+}

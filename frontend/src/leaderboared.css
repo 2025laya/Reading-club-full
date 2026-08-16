@@ -1,0 +1,20 @@
+@media screen and (max-width:606px){
+.font{
+    font-size: 18px !important;
+}
+.font2{
+    font-size: 12px !important;
+}
+.item{
+    width:80vw !important;
+}
+}
+
+@media screen and (max-width:478px){
+.abook{
+display: none !important;
+}
+.bigdiv{
+    flex-wrap: wrap !important ;
+}
+}

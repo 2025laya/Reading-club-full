@@ -1,0 +1,39 @@
+@font-face {
+    font-family: "elmesriBold";
+    src: url("./fonts/ElMessiri-Bold.ttf");
+}
+
+@font-face {
+    font-family: "elmesriMeduim";
+    src: url("./fonts/ElMessiri-Medium.ttf");
+}
+
+@font-face {
+    font-family: "elmesriRegular";
+    src: url("./fonts/ElMessiri-Regular.ttf");
+}
+
+@font-face {
+    font-family: "elmesriSemiBold";
+    src: url("./fonts/ElMessiri-SemiBold.ttf");
+}
+
+@font-face {
+    font-family: "zheng";
+    src: url("./fonts/MaShanZheng-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Dongle";
+    src: url("./fonts/Dongle-Regular.ttf");
+}
+
+
+body.ko {
+    font-size: 20px;
+}
+
+/* تحسين بسيط فقط للنصوص الكورية بدون تأثير على layout */
+body.ko * {
+    line-height: 1.4;
+}

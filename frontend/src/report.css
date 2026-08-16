@@ -1,0 +1,257 @@
+.report-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.45);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 5000;
+}
+
+.report-box {
+    width: 380px;
+    max-width: 90%;
+
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 25px;
+
+    position: relative;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.report-box h2 {
+    margin: 0 0 8px;
+    text-align: center;
+}
+
+.report-box p {
+    text-align: center;
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+/* =========================
+   اختيار نوع البلاغ
+========================= */
+
+.report-type-selection {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+
+    margin-bottom: 18px;
+}
+
+.report-type-btn {
+    border: 1px solid #e5e5e5;
+    background: #f8f8f8;
+
+    border-radius: 12px;
+
+    padding: 15px 10px;
+
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 5px;
+
+    transition: 0.2s;
+}
+
+.report-type-btn:hover {
+    background: #eeeeee;
+    transform: translateY(-2px);
+}
+
+.report-type-btn span {
+    font-size: 27px;
+}
+
+.report-type-btn strong {
+    font-size: 15px;
+    color: #222;
+}
+
+.report-type-btn small {
+    color: #888;
+    font-size: 11px;
+}
+
+.report-type-btn.selected {
+    background: #222;
+    border-color: #222;
+}
+
+.report-type-btn.selected strong,
+.report-type-btn.selected small {
+    color: white;
+}
+
+/* =========================
+   العنصر المبلّغ عنه
+========================= */
+
+.report-target {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    background: #f7f7f7;
+
+    border: 1px solid #e8e8e8;
+
+    border-radius: 10px;
+
+    padding: 10px 12px;
+
+    margin-bottom: 20px;
+
+    font-size: 13px;
+}
+
+.report-target span {
+    color: #888;
+}
+
+.report-target strong {
+    color: #222;
+}
+
+.report-target small {
+    color: #777;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* =========================
+   textarea
+========================= */
+
+.report-box label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-weight: bold;
+}
+
+.report-box textarea {
+    width: 100%;
+    height: 130px;
+
+    box-sizing: border-box;
+
+    resize: none;
+
+    border: 1px solid #ddd;
+
+    border-radius: 10px;
+
+    padding: 12px;
+
+    font-family: inherit;
+
+    outline: none;
+}
+
+.report-box textarea:focus {
+    border-color: #555;
+}
+
+/* =========================
+   إرسال
+========================= */
+
+.send-report {
+    width: 100%;
+
+    margin-top: 15px;
+
+    padding: 12px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #222;
+
+    color: white;
+
+    cursor: pointer;
+}
+
+.send-report:hover {
+    background: #444;
+}
+
+.send-report:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+}
+
+/* =========================
+   إغلاق
+========================= */
+
+.report-close {
+    position: absolute;
+
+    right: 12px;
+    top: 10px;
+
+    border: none;
+
+    background: transparent;
+
+    font-size: 25px;
+
+    cursor: pointer;
+}
+.report-box select {
+    width: 100%;
+    height: 42px;
+
+    box-sizing: border-box;
+
+    margin-bottom: 15px;
+
+    padding: 0 12px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 10px;
+
+    background: white;
+
+    font-family: inherit;
+
+    outline: none;
+
+    cursor: pointer;
+}
+
+.report-box select:focus {
+    border-color: #555;
+}
+
+.report-box label {
+    margin-top: 5px;
+}

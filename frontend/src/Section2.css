@@ -1,0 +1,15 @@
+.sec2{
+    margin-top: 150px;
+    font-family: 'playpen';
+    font-size: 50px;
+}
+@media screen and (max-width:1000px) {
+    .sec2{
+    font-size: 40px;
+}
+}
+@media screen and (max-width:1000px) {
+    .sec2{
+    font-size: 30px;
+}
+}
