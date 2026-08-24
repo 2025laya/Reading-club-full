@@ -5,81 +5,158 @@ const auth = require("../middleware/auth");
 const SiteRating = require("../models/SiteRating");
 
 
-// إضافة أو تعديل تقييم الواجهة
+// =====================================================
+// إضافة أو تعديل تقييم المستخدم
+// =====================================================
 router.post("/", auth, async (req, res) => {
     try {
-        const { rating } = req.body;
 
-        if (rating === undefined  || rating < 1 ||  rating > 5) {
+        const {
+            rating
+        } = req.body;
+
+
+        const numericRating =
+            Number(rating);
+
+
+        if (
+            rating === undefined ||
+            rating === null ||
+            Number.isNaN(numericRating) ||
+            numericRating < 1 ||
+            numericRating > 5
+        ) {
+
             return res.status(400).json({
-                msg: "Rating must be between 1 and 5"
+                msg:
+                    "Rating must be between 1 and 5"
             });
         }
 
-        let siteRating = await SiteRating.findOne({
-            userId: req.user.id
-        });
+
+        let siteRating =
+            await SiteRating.findOne({
+                userId:
+                    req.user.id
+            });
+
 
         if (siteRating) {
-            siteRating.rating = rating;
+
+            siteRating.rating =
+                numericRating;
+
         } else {
-            siteRating = new SiteRating({
-                userId: req.user.id,
-                rating
-            });
+
+            siteRating =
+                new SiteRating({
+                    userId:
+                        req.user.id,
+
+                    rating:
+                        numericRating
+                });
         }
+
 
         await siteRating.save();
 
+
         res.json({
-            msg: "Rating updated successfully",
-            rating: siteRating.rating
+
+            msg:
+                "Rating updated successfully",
+
+            rating:
+                siteRating.rating
         });
 
+
     } catch (err) {
-        console.error(err.message);
+
+        console.error(
+            "POST SITE RATING ERROR:",
+            err
+        );
 
         res.status(500).json({
-            msg: "Server error"
+            msg:
+                "Server error"
         });
     }
 });
 
 
-// جلب متوسط تقييم الواجهة
+// =====================================================
+// جلب متوسط التقييم
+// =====================================================
 router.get("/", async (req, res) => {
     try {
-        const result = await SiteRating.aggregate([
-            {
-                $group: {
-                    _id: null,
-                    averageRating: {
-                        $avg: "$rating"
-                    },
-                    totalRatings: {
-                        $sum: 1
+
+        const result =
+            await SiteRating.aggregate([
+
+                {
+                    $group: {
+
+                        _id:
+                            null,
+
+                        averageRating: {
+                            $avg:
+                                "$rating"
+                        },
+
+                        totalRatings: {
+                            $sum:
+                                1
+                        }
                     }
                 }
-            }
-        ]);
+            ]);
 
-        if (result.length === 0) {
+
+        if (
+            result.length === 0
+        ) {
+
             return res.json({
-                averageRating: 0,
-                totalRatings: 0
+
+                averageRating:
+                    0,
+
+                totalRatings:
+                    0
             });
         }
 
+
         res.json({
-            averageRating: Number(result[0].averageRating.toFixed(1)),
-            totalRatings: result[0].totalRatings
+
+            averageRating:
+                Number(
+                    result[0]
+                        .averageRating
+                        .toFixed(1)
+                ),
+
+            totalRatings:
+                result[0]
+                    .totalRatings
         });
 
+
     } catch (err) {
-        console.error(err.message);
+
+        console.error(
+            "GET SITE RATING ERROR:",
+            err
+        );
 
         res.status(500).json({
-            msg: "Server error"
+            msg:
+                "Server error"
         });
     }
 });

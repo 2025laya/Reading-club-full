@@ -55,9 +55,9 @@ input{
 }
 .login{
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
-  height: 100vh;
+  height: 125vh;
   background-color: #E9D5FF;
   font-family: 'caveatfont'; 
 }
@@ -94,4 +94,10 @@ input{
   }
 
 }
- 
+ .nav-link1:hover{
+color: red;
+}
+.nav-link1{
+    
+color:black;
+}

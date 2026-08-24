@@ -60,6 +60,11 @@ const avatars = [
 ];
 export default function Chat({ setpage, state }) {
   const { t } = useTranslation();
+// const storedUser = JSON.parse(localStorage.getItem("user") || "null");
+
+// const [selectedAvatar, setSelectedAvatar] = useState(
+//   storedUser?.avatar != null ? Number(storedUser.avatar) : null
+// );
 
   const font =
     i18n.language === "ar"
@@ -482,17 +487,20 @@ export default function Chat({ setpage, state }) {
                 zIndex: "1000",
               }}
             >
-              <img
+<img
   src={
-    msg.sender?.avatar !== null && msg.sender?.avatar !== undefined
-      ? avatars[msg.sender.avatar]
+    msg.sender?.avatar != null
+      ? avatars[Number(msg.sender.avatar)]
       : user3333
   }
   alt="profile"
-  width="3%"
-  height="3%"
-  style={{ marginBottom: "20px" , borderRadius:"50%"}}
-/> 
+  width="40"
+  height="40"
+  style={{
+    margin: "5px 10px",
+    borderRadius: "50%"
+  }}
+/>
               <Text>
                 <div
                   style={{

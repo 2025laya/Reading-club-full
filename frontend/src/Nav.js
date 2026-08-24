@@ -23,9 +23,7 @@ export default function Nav({ setpage, setstate, state }) {
   function goToHome() {
     setpage("home");
   }
-     function gotoLogout() {
-    setpage("Logout");
-  }
+
 
   function gotosignup() {
     setpage("signup");
@@ -150,20 +148,9 @@ export default function Nav({ setpage, setstate, state }) {
                   {t("signUp")}
                 </button>
               </li>
-              <li className="nav-item">
-                <button
-                  className="nav-link"
-                  href="#"
-                  onClick={gotoLogout}
-                  style={{
-                    color: state ? "#e2dfe4" : "#1E1B4B",
-                    transition: "0.3s",
-                    fontFamily: font,
-                  }}
-                >
-                 Delete Account
-                </button>
-              </li>
+              {/* <li className="nav-item">
+                
+              </li> */}
               <li className="nav-item">
                 <select
                   className="nav-link"

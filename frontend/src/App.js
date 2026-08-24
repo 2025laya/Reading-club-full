@@ -46,6 +46,7 @@ import Arr from "./newArrBut";
 import CategoryType from "./categoryType.js";
 import Sec5 from "./notesAboutUs.js";
 import ViewAll1 from "./viewall1.js";
+import EditAccount from "./editAccount";
 function App() {
   const { t } = useTranslation();
   const font = i18n.language === "ar" ? 
@@ -59,7 +60,10 @@ function App() {
   const [selectedBook , setSelectedBook]=useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [comments, setComments] = useState([]);
-  const [profileReturnPage , setProfileReturnPage]=useState("signin")
+  const [profileReturnPage , setProfileReturnPage]=useState("signin");
+  const [isEditing, setIsEditing] = useState(false);
+  const [user, setUser] = useState(
+  JSON.parse(localStorage.getItem("user") || "null"));
   useEffect(() => {
     const savedComments = localStorage.getItem("comments");
     if (savedComments) {
@@ -176,6 +180,8 @@ function App() {
                 field4={t("last name")}
                 isSignup={true}
                 setProfileReturnPage={setProfileReturnPage}
+                isEditing={isEditing}
+                setIsEditing={setIsEditing}
               >
                 {" "}
                 <h2 style={{ marginBottom: "20px", fontFamily: font }}>
@@ -206,6 +212,14 @@ function App() {
               </Logout>{" "}
             </div>
           )}
+          {page === "editAccount" && (
+  <EditAccount
+    setpage={setpage}
+    setUser={setUser}
+    state={state}
+    setProfileReturnPage={setProfileReturnPage}
+  />
+)}
          {page === "viewAll1" && (
   <ViewAll1
     state={state}
@@ -236,7 +250,10 @@ function App() {
           )}
            {page === "profile" && (
                       <div>
-                        <Nav setpage={setpage} state={state} setstate={setstate} />
+                        <Nav 
+                         setpage={setpage}
+                         state={state}
+                         setstate={setstate} />
                         <Profile
                          setpage={setpage}
                          state={state} 
@@ -287,7 +304,7 @@ function App() {
           {page==="catType" &&
            <div>
              <Nav state={state} setpage={setpage} setstate={setstate}/>
-             <CategoryType state={state} setpage={setpage} setstate={setstate} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory}/>
+             <CategoryType state={state} setpage={setpage} setstate={setstate} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} setSelectedBook={setSelectedBook}/>
            </div>
           }
           {page === "gamification" && (

@@ -19,7 +19,13 @@ import {
 
 
 export default function Lovebook() {
-
+  const { t } = useTranslation();
+    const font = i18n.language === "ar" ? 
+  "elmesriRegular, sans-serif" :
+   i18n.language==="zh" || i18n.language==="ja" ? "zheng":
+    i18n.language==="ko"?"Dongle" :
+     "playpen, sans-serif";
+     const token=localStorage.getItem("token");
   const savebook = localStorage.getItem("savebook");
   const savebooks =
     savebook && Array.isArray(JSON.parse(savebook)) ? JSON.parse(savebook) : [];
@@ -30,7 +36,8 @@ export default function Lovebook() {
        
         <h5 style={{ marginTop:"50vh"}} >
           <span style={{ color: "#b422a0",
-                  fontSize: "50px"}}>Ooops</span> Your save list is empty
+                  fontSize: "50px",
+                  fontFamily:font}}>{t("oops")}</span> Your save list is empty
         </h5>
       )} 
 
@@ -49,8 +56,8 @@ export default function Lovebook() {
             minHeight: "100vh",
           }}
         >
-          <h3>
-            My save Books{" "}
+          <h3 style={{fontFamily:font}}>
+            {t("savedBooks")}{" "}
             <FontAwesomeIcon
               icon={faStarHalfStroke}
               beat
@@ -87,7 +94,7 @@ export default function Lovebook() {
 
                   <div className="card__footer">
                     <div style={{ display: "flex", flexDirection: "column" }}>
-                      <button className="card__button">Read More</button>
+                      <button className="card__button" style={{fontFamily:font}}>{t("readMore")}</button>
                       <div
                         style={{
                           display: "flex",

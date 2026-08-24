@@ -420,7 +420,7 @@ function viewAll() {
                 fontFamily: font
               }}
             >
-              المؤلف
+             {t("authorName")}
             </option>
 
             <option
@@ -429,7 +429,7 @@ function viewAll() {
                 fontFamily: font
               }}
             >
-              سنة الإصدار
+             {t("publicationYear")}
             </option>
 
           </motion.select>

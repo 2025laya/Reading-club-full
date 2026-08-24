@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import i18n from "./i18n";
+
 import user3333 from "./images/user.png";
+
 import user1 from "./images/user1.png";
 import user2 from "./images/user2.png";
 import user3 from "./images/user3.png";
@@ -33,171 +35,225 @@ import user28 from "./images/user28.png";
 import user29 from "./images/user29.png";
 import user30 from "./images/user30.png";
 import user31 from "./images/user31.png";
-import Text from "./Text"
+
+import Text from "./Text";
+
 const avatars = [
-  user1,user2,user3,user4,user5,
-  user6,user7,user8,user9,
-  user10,user11,user12,user13,
-  user14,user15,user16,user17,
-  user18,user19,user20,user21,
-  user22,user23,user24,user25,
-  user26,user27,user28,user29,
-  user30,user31
+  user1, user2, user3, user4, user5,
+  user6, user7, user8, user9,
+  user10, user11, user12, user13,
+  user14, user15, user16, user17,
+  user18, user19, user20, user21,
+  user22, user23, user24, user25,
+  user26, user27, user28, user29,
+  user30, user31
 ];
-console.log(avatars[0]);
+
 export default function Profile(props) {
 
-  const storedUser = JSON.parse(localStorage.getItem("user")) || {};
-  const [avatar, setAvatar] = useState(storedUser.avatar ?? null);
   const { t } = useTranslation();
- const font = i18n.language === "ar" ? 
-  "elmesriRegular, sans-serif" :
-   i18n.language==="zh" || i18n.language==="ja" ? "zheng":
-    i18n.language==="ko"?"Dongle" :
-     "playpen, sans-serif";
 
-async function chooseAvatar(index) {
-  try {
-    const token = localStorage.getItem("token");
+  const font =
+    i18n.language === "ar"
+      ? "elmesriRegular, sans-serif"
+      : i18n.language === "zh" || i18n.language === "ja"
+      ? "zheng"
+      : i18n.language === "ko"
+      ? "Dongle"
+      : "playpen, sans-serif";
 
-    if (!token) {
-      console.log("NO TOKEN");
-      return;
-    }
+  const storedUser = JSON.parse(
+    localStorage.getItem("user") || "{}"
+  );
 
-    const response = await fetch("http://localhost:3000/api/me", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        "x-auth-token": token,
-      },
-      body: JSON.stringify({
-        avatar: index,
-      }),
-    });
+  // إذا جئنا من EditAccount
+  const editingAvatar =
+    localStorage.getItem("editingAvatar");
 
-    const data = await response.json();
+  // إذا جئنا من signup
+  const pendingAvatar =
+    localStorage.getItem("pendingAvatar");
 
-    console.log("AVATAR UPDATE:", data);
+  const initialAvatar =
+    props.returnPage === "editAccount"
+      ? (
+          editingAvatar !== null
+            ? Number(editingAvatar)
+            : storedUser.avatar ?? null
+        )
+      : (
+          pendingAvatar !== null
+            ? Number(pendingAvatar)
+            : null
+        );
 
-    if (!response.ok) {
-      console.log("AVATAR UPDATE ERROR:", data);
-      return;
-    }
+  const [avatar, setAvatar] =
+    useState(initialAvatar);
 
-    const updatedUser = {
-      ...storedUser,
-      ...data.user,
-      avatar: index,
-    };
-
-    localStorage.setItem("user", JSON.stringify(updatedUser));
+  // اختيار الصورة
+  function chooseAvatar(index) {
 
     setAvatar(index);
 
-  } catch (error) {
-    console.error("AVATAR ERROR:", error);
   }
-}
 
-
-async function removeAvatar() {
-  try {
-    const token = localStorage.getItem("token");
-
-    if (!token) {
-      console.log("NO TOKEN");
-      return;
-    }
-
-    const response = await fetch("http://localhost:3000/api/me", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        "x-auth-token": token,
-      },
-      body: JSON.stringify({
-        avatar: null,
-      }),
-    });
-
-    const data = await response.json();
-
-    console.log("REMOVE AVATAR:", data);
-
-    if (!response.ok) {
-      console.log("REMOVE AVATAR ERROR:", data);
-      return;
-    }
-
-    const updatedUser = {
-      ...storedUser,
-      ...data.user,
-      avatar: null,
-    };
-
-    localStorage.setItem("user", JSON.stringify(updatedUser));
+  // حذف الصورة
+  function removeAvatar() {
 
     setAvatar(null);
 
-  } catch (error) {
-    console.error("REMOVE AVATAR ERROR:", error);
   }
+
+  // حفظ الصورة
+function saveAvatar() {
+
+  // =====================================
+  // جئنا من EditAccount
+  // =====================================
+
+  if (props.returnPage === "editAccount") {
+
+    if (avatar !== null) {
+
+      localStorage.setItem(
+        "editingAvatar",
+        String(avatar)
+      );
+
+    } else {
+
+      localStorage.removeItem(
+        "editingAvatar"
+      );
+    }
+
+    // العودة إلى EditAccount
+    props.setpage("editAccount");
+
+    return;
+  }
+
+  // =====================================
+  // جئنا من إنشاء الحساب
+  // =====================================
+
+  if (avatar !== null) {
+
+    localStorage.setItem(
+      "pendingAvatar",
+      String(avatar)
+    );
+
+  } else {
+
+    localStorage.removeItem(
+      "pendingAvatar"
+    );
+  }
+
+  props.setpage("signup");
 }
   return (
-    <div style={{ textAlign: "center" , height:"100vh" , marginTop:"20%px"}}>
 
+    <div
+      style={{
+        textAlign: "center",
+        height: "85vh",
+        marginTop: "3%"
+      }}
+    >
+
+      {/* الصورة الحالية */}
       <img
-        src={avatar != null ? avatars[avatar] : user3333}
+        src={
+          avatar !== null
+            ? avatars[avatar]
+            : user3333
+        }
         alt="profile"
         width="150"
-        style={{ borderRadius: "50%" }}
+        style={{
+          borderRadius: "50%"
+        }}
       />
 
-      
-      <div style={{
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "center",
-        marginTop: "20px"
-      }}>
+      {/* جميع الصور */}
+
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          marginTop: "20px"
+        }}
+      >
+
         {avatars.map((img, index) => (
+
           <img
             key={index}
             src={img}
             width="80"
-            onClick={() => chooseAvatar(index)}
+            onClick={() =>
+              chooseAvatar(index)
+            }
             style={{
               margin: "5px",
               cursor: "pointer",
               borderRadius: "50%",
-              border: avatar === index ? "3px solid blue" : "none"
+
+              border:
+                avatar === index
+                  ? "3px solid blue"
+                  : "none"
             }}
           />
-        ))}
-      </div>
-      <div style={{display:"flex", justifyContent:"space-between" , margin:"30px"}}>
- <button
-  onClick={() =>
-    props.setpage(props.returnPage)
-  }
-  className="login-button"
-  style={{
-    marginTop: "20px",
-    fontFamily: font
-  }}
->
-  <Text>{t("save")}</Text>
-</button>
-<div style={{ marginTop: "10px" }}>
 
-        <button className="login-button" onClick={removeAvatar} style={{width:"300px"}}>
-          <Text>{t("removeProfilePicture")}</Text>
+        ))}
+
+      </div>
+
+      {/* الأزرار */}
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          margin: "30px"
+        }}
+      >
+
+        {/* Save */}
+
+        <button
+          onClick={saveAvatar}
+          className="login-button"
+          style={{
+            marginTop: "20px",
+            fontFamily: font
+          }}
+        >
+          <Text>
+            {t("save")}
+          </Text>
+        </button>
+
+        {/* Remove */}
+
+        <button
+          className="login-button"
+          onClick={removeAvatar}
+          style={{
+            width: "300px"
+          }}
+        >
+          <Text>
+            {t("removeProfilePicture")}
+          </Text>
         </button>
 
       </div>
-      </div>
-     
+
     </div>
   );
 }

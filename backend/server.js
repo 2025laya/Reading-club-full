@@ -164,7 +164,10 @@ mongoose
 // =========================
 
 const PORT = process.env.PORT || 5000;
-
+app.use((req, res, next) => {
+    console.log("REQUEST:", req.method, req.originalUrl);
+    next();
+});
 server.listen(PORT, () => {
 
     console.log(
