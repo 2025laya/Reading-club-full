@@ -1,159 +1,16 @@
-// import React from "react";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
-// import { useTranslation } from "react-i18next";
-// import { motion } from "framer-motion";
-// import Text from "./Text.js"
-// export default function AllComm({ comments, setComments, state }) {
-//   const { t } = useTranslation();
-//   const editComment = (index) => {
-//     const newRating = prompt(t("numStars"));
-//     if (newRating === null) return;
-//     const rating = Number(newRating);
-//     if (rating < 1 || rating > 5 || isNaN(rating)) {
-//       alert(t("enter"));
-//       return;
-//     }
-//     let text = "";
-//     if (rating < 5) {
-//       const reason = prompt(t("writeReasonHere"));
-//       if (reason === null) return;
-//       if (!reason.trim()) return;
-//       text = reason.trim();
-//     }
-//     const updated = [...comments];
-//     updated[index] = { rating, text: rating < 5 ? text : "" };
-//     setComments(updated);
-//     localStorage.setItem("comments", JSON.stringify(updated));
-//   };
-//   const deleteComment = (index) => {
-//     const updated = [...comments];
-//     updated.splice(index, 1);
-//     setComments(updated);
-//     localStorage.setItem("comments", JSON.stringify(updated));
-//   };
-//   return (
-//     <motion.div
-//       style={{ minHeight: "100vh", width: "100%" }}
-//       initial={{ opacity: 0, y: -30 }}
-//       whileInView={{ opacity: 1, y: 0 }}
-//       transition={{ duration: 0.3 }}
-//     >
-//       <div style={{ minHeight: "100vh", width: "100%" }}>
-//         <Text
-//           style={{
-//             color: state ? "#e2dfe4" : "#1E1B4B",
-//             marginTop: "50px",
-//             fontSize: "40px",
-//             paddingBottom: "50px",
-//           }}
-//         >
-//           {t("ourRating")}
-//         </Text>
 
-//         <div
-//           className="comments-grid"
-//           style={{
-//             display: "grid",
-//             gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
-//             gap: "20px",
-//             padding: "20px",
-//             justifyItems: "center",
-//           }}
-//         >
-//           {(comments || []).map((c, i) => (
-//             <div
-//               key={i}
-//               className="comment-card"
-//               style={{
-//                 width: "100%",
-//                 maxWidth: "300px",
-//                 height: "160px",
-//                 display: "flex",
-//                 flexDirection: "column",
-//                 justifyContent: "space-between",
-//                 overflow: "hidden",
-//               }}
-//             >
-//               <div
-//                 style={{
-//                   display: "flex",
-//                   justifyContent: "space-between",
-//                   height: "100%",
-//                 }}
-//               >
-//                 <div
-//                   style={{
-//                     padding: "20px",
-//                     display: "flex",
-//                     flexDirection: "column",
-//                     alignItems: "center",
-//                     width: "100%",
-//                     overflow: "hidden",
-//                   }}
-//                 >
-//                   {c.text && (
-//                     <p
-//                       style={{
-//                         overflow: "hidden",
-//                         textOverflow: "ellipsis",
-//                         display: "-webkit-box",
-//                         WebkitLineClamp: 3,
-//                         WebkitBoxOrient: "vertical",
-//                       }}
-//                     >
-//                       {c.text}
-//                     </p>
-//                   )}
-//                   <p>{"⭐️".repeat(Number(c.rating) || 0)}</p>
-//                 </div>
+import React, { useEffect, useState } from "react";
 
-//                 <div style={{ position: "relative" }}>
-// <select
-//                     value=""
-//                     onChange={(e) => {
-//                       if (e.target.value === "edit") editComment(i);
-//                       if (e.target.value === "delete") deleteComment(i);
-//                       e.target.value = "";
-//                     }}
-//                     style={{
-//                       position: "absolute",
-//                       top: 0,
-//                       left: 0,
-//                       width: "30px",
-//                       height: "30px",
-//                       opacity: 0,
-//                       cursor: "pointer",
-//                     }}
-//                   >
-//                     <option value="">{t("menu")}</option>
-//                     <option value="edit">{t("edit1")}</option>
-//                     <option value="delete">{t("delete")}</option>
-//                   </select>
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 
-//                   <FontAwesomeIcon
-//                     icon={faEllipsisVertical}
-//                     style={{
-//                       fontSize: "20px",
-//                       color: "#1E1B4B",
-//                     }}
-//                   />
-//                 </div>
-//               </div>
-//             </div>
-//           ))}
-//         </div>
-//       </div>
-//     </motion.div>
-//   );
-// }
-import React, {useEffect,useState} from "react";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEllipsisVertical} from "@fortawesome/free-solid-svg-icons";
-import {useTranslation} from "react-i18next";
-import {motion} from "framer-motion";
+import { useTranslation } from "react-i18next";
+import { motion } from "framer-motion";
+
 import Text from "./Text.js";
+
 import user3333 from "./images/user.png";
+
 import user1 from "./images/user1.png";
 import user2 from "./images/user2.png";
 import user3 from "./images/user3.png";
@@ -185,6 +42,8 @@ import user28 from "./images/user28.png";
 import user29 from "./images/user29.png";
 import user30 from "./images/user30.png";
 import user31 from "./images/user31.png";
+
+
 const avatars = [
     user1,user2,user3,user4,
     user5,user6,user7,user8,
@@ -195,42 +54,71 @@ const avatars = [
     user25,user26,user27,user28,
     user29,user30,user31
 ];
-export default function AllComm({comments,setComments,state}) {
-    const { t } =useTranslation();
-    const [ currentUser, setCurrentUser] = useState(null);
+
+
+export default function AllComm({
+    comments,
+    setComments,
+    state
+}) {
+
+    const { t } = useTranslation();
+
+    const [currentUser, setCurrentUser] =
+        useState(null);
+
     useEffect(() => {
+
         async function getCurrentUser() {
+
             try {
-                const token =localStorage.getItem("token");
+
+                const token =
+                    localStorage.getItem("token");
+
                 if (!token) {
                     return;
                 }
-                const response = await fetch("http://localhost:3000/api/me",
+
+                const response =
+                    await fetch(
+                        "http://localhost:3000/api/me",
                         {
                             headers: {
-                                "x-auth-token":
-                                    token
+                                "x-auth-token": token
                             }
                         }
                     );
-                const data = await response.json();
+
+                const data =
+                    await response.json();
+
                 console.log(
-    "ALL COMMENTS:",
-    data
-);
+                    "CURRENT USER:",
+                    data
+                );
+
                 if (response.ok) {
+
                     setCurrentUser(data);
-                    localStorage.setItem("user",JSON.stringify(data));
+
+                    localStorage.setItem(
+                        "user",
+                        JSON.stringify(data)
+                    );
                 }
 
             } catch (err) {
+
                 console.error(
                     "CURRENT USER ERROR:",
                     err
                 );
             }
         }
+
         getCurrentUser();
+
     }, []);
 
     useEffect(() => {
@@ -239,19 +127,33 @@ export default function AllComm({comments,setComments,state}) {
 
             try {
 
-                const response = await fetch(
-    "http://localhost:3000/api/site-comments"
-);
+                const response =
+                    await fetch(
+                        "http://localhost:3000/api/site-comments"
+                    );
 
-console.log("STATUS:", response.status);
-console.log("CONTENT TYPE:", response.headers.get("content-type"));
+                console.log(
+                    "STATUS:",
+                    response.status
+                );
+                console.log(
+                    "CONTENT TYPE:",
+                    response.headers.get(
+                        "content-type"
+                    )
+                );
 
                 const data =
                     await response.json();
-console.log("COMMENTS FROM SERVER:", data);
+
+                console.log(
+                    "COMMENTS FROM SERVER:",
+                    data
+                );
 
                 if (response.ok) {
-                  setComments(
+
+                    setComments(
                         Array.isArray(data)
                             ? data
                             : []
@@ -267,15 +169,10 @@ console.log("COMMENTS FROM SERVER:", data);
             }
         }
 
-
         getComments();
 
     }, [setComments]);
 
-
-    // =====================================================
-    // تعديل
-    // =====================================================
     const editComment = async (
         commentId,
         oldText,
@@ -288,15 +185,12 @@ console.log("COMMENTS FROM SERVER:", data);
                 oldRating
             );
 
-
         if (newRating === null) {
             return;
         }
 
-
         const rating =
             Number(newRating);
-
 
         if (
             Number.isNaN(rating) ||
@@ -323,11 +217,9 @@ console.log("COMMENTS FROM SERVER:", data);
                     oldText || ""
                 );
 
-
             if (reason === null) {
                 return;
             }
-
 
             if (!reason.trim()) {
 
@@ -338,7 +230,6 @@ console.log("COMMENTS FROM SERVER:", data);
                 return;
             }
 
-
             finalText =
                 reason.trim();
         }
@@ -347,10 +238,7 @@ console.log("COMMENTS FROM SERVER:", data);
         try {
 
             const token =
-                localStorage.getItem(
-                    "token"
-                );
-
+                localStorage.getItem("token");
 
             if (!token) {
                 return;
@@ -359,7 +247,7 @@ console.log("COMMENTS FROM SERVER:", data);
 
             const response =
                 await fetch(
-                    `/api/site-comments/${commentId}`,
+                    `http://localhost:3000/api/site-comments/${commentId}`,
                     {
                         method: "PUT",
 
@@ -376,7 +264,8 @@ console.log("COMMENTS FROM SERVER:", data);
                                 text:
                                     finalText,
 
-                                rating
+                                rating:
+                                    rating
                             })
                     }
                 );
@@ -422,19 +311,13 @@ console.log("COMMENTS FROM SERVER:", data);
         }
     };
 
-
-    // =====================================================
-    // حذف
-    // =====================================================
     const deleteComment = async (
         commentId
     ) => {
-
         const confirmed =
             window.confirm(
                 "Are you sure you want to delete this comment?"
             );
-
 
         if (!confirmed) {
             return;
@@ -444,10 +327,7 @@ console.log("COMMENTS FROM SERVER:", data);
         try {
 
             const token =
-                localStorage.getItem(
-                    "token"
-                );
-
+                localStorage.getItem("token");
 
             if (!token) {
                 return;
@@ -456,9 +336,10 @@ console.log("COMMENTS FROM SERVER:", data);
 
             const response =
                 await fetch(
-                    `/api/site-comments/${commentId}`,
+                    `http://localhost:3000/api/site-comments/${commentId}`,
                     {
                         method: "DELETE",
+
                         headers: {
                             "x-auth-token":
                                 token
@@ -504,7 +385,6 @@ console.log("COMMENTS FROM SERVER:", data);
             );
         }
     };
-
 
     return (
 
@@ -562,17 +442,14 @@ console.log("COMMENTS FROM SERVER:", data);
                     className="comments-grid"
 
                     style={{
-                        display:
-                            "grid",
+                        display: "grid",
 
                         gridTemplateColumns:
                             "repeat(auto-fill, minmax(250px, 1fr))",
 
-                        gap:
-                            "20px",
+                        gap: "20px",
 
-                        padding:
-                            "20px",
+                        padding: "20px",
 
                         justifyItems:
                             "center"
@@ -581,10 +458,6 @@ console.log("COMMENTS FROM SERVER:", data);
 
                     {(comments || []).map(
                         (c, i) => {
-
-                            // =============================================
-                            // صاحب التعليق
-                            // =============================================
 
                             const owner =
                                 c.userId &&
@@ -595,35 +468,24 @@ console.log("COMMENTS FROM SERVER:", data);
 
 
                             const firstName =
-                                owner?.name ||
-                                "";
+                                owner?.name || "";
 
 
                             const lastName =
-                                owner?.lastName ||
-                                "";
+                                owner?.lastName || "";
 
 
                             const email =
-                                owner?.email ||
-                                "";
+                                owner?.email || "";
 
 
                             const senderName =
                                 `${firstName} ${lastName}`.trim() ||
                                 "User";
-
-
-                            // =============================================
-                            // الصورة
-                            // =============================================
-                            const avatarIndex =
-                                owner?.avatar !==
-                                    null &&
-                                owner?.avatar !==
-                                    undefined &&
-                                owner?.avatar !==
-                                    ""
+const avatarIndex =
+                                owner?.avatar !== null &&
+                                owner?.avatar !== undefined &&
+                                owner?.avatar !== ""
                                     ? Number(
                                         owner.avatar
                                     )
@@ -631,20 +493,11 @@ console.log("COMMENTS FROM SERVER:", data);
 
 
                             const senderAvatar =
-                                avatarIndex !==
-                                    null &&
-                                avatars[
-                                    avatarIndex
-                                ]
-                                    ? avatars[
-                                        avatarIndex
-                                    ]
+                                avatarIndex !== null &&
+                                avatars[avatarIndex]
+                                    ? avatars[avatarIndex]
                                     : user3333;
 
-
-                            // =============================================
-                            // هل هو صاحب التعليق؟
-                            // =============================================
 
                             const isOwner =
                                 currentUser &&
@@ -656,29 +509,23 @@ console.log("COMMENTS FROM SERVER:", data);
                                     owner._id
                                 );
 
-
+const isAdmin =
+    currentUser?.role === "admin";
                             return (
 
                                 <div
-                                    key={
-                                        c._id ||
-                                        i
-                                    }
+                                    key={`${c._id}-${i}`}
 
                                     className="comment-card"
 
                                     style={{
-                                        width:
-                                            "100%",
+                                        width: "100%",
 
-                                        maxWidth:
-                                            "300px",
+                                        maxWidth: "300px",
 
-                                        height:
-                                            "160px",
+                                        height: "160px",
 
-                                        display:
-                                            "flex",
+                                        display: "flex",
 
                                         flexDirection:
                                             "column",
@@ -686,27 +533,20 @@ console.log("COMMENTS FROM SERVER:", data);
                                         justifyContent:
                                             "space-between",
 
-                                        overflow:
-                                            "hidden"
+                                        overflow: "hidden"
                                     }}
                                 >
 
                                     <div
                                         style={{
-                                            display:
-                                                "flex",
+                                            display: "flex",
 
                                             justifyContent:
                                                 "space-between",
 
-                                            height:
-                                                "100%"
+                                            height: "100%"
                                         }}
                                     >
-
-                                        {/* ================================= */}
-                                        {/* معلومات المستخدم */}
-                                        {/* ================================= */}
 
                                         <div
                                             style={{
@@ -721,17 +561,14 @@ console.log("COMMENTS FROM SERVER:", data);
 
                                                 alignItems:
                                                     "center",
-                                                    width:
+
+                                                width:
                                                     "100%",
 
                                                 overflow:
                                                     "hidden"
                                             }}
                                         >
-
-                                            {/* ============================= */}
-                                            {/* الصورة + الاسم + الكنية + الإيميل */}
-                                            {/* ============================= */}
 
                                             <div
                                                 style={{
@@ -748,8 +585,7 @@ console.log("COMMENTS FROM SERVER:", data);
                                                         "100%"
                                                 }}
                                             >
-
-                                                <img
+                                            <img
                                                     src={
                                                         senderAvatar
                                                     }
@@ -805,7 +641,7 @@ console.log("COMMENTS FROM SERVER:", data);
                                                                 "ellipsis",
 
                                                             whiteSpace:
-                                                            "nowrap"
+                                                                "nowrap"
                                                         }}
                                                     >
                                                         {
@@ -817,10 +653,6 @@ console.log("COMMENTS FROM SERVER:", data);
 
                                             </div>
 
-
-                                            {/* ============================= */}
-                                            {/* التعليق */}
-                                            {/* ============================= */}
 
                                             {c.text && (
 
@@ -840,49 +672,24 @@ console.log("COMMENTS FROM SERVER:", data);
 
                                                         WebkitBoxOrient:
                                                             "vertical",
-
-                                                        width:
+                                                            width:
                                                             "100%",
 
                                                         margin:
                                                             "8px 0 0"
                                                     }}
                                                 >
-                                                    {
-                                                        c.text
-                                                    }
+                                                    {c.text}
                                                 </p>
-
                                             )}
-
-
-                                            {/* ============================= */}
-                                            {/* النجوم */}
-                                            {/* ============================= */}
-
-                                            <p
-                                                style={{
-                                                    margin:
-                                                        "4px 0"
-                                                }}
-                                            >
-                                                {
-                                                    "⭐️".repeat(
-                                                        Number(
-                                                            c.rating
-                                                        ) || 0
-                                                    )
-                                                }
+                                            <p style={{ margin: "4px 0" }}>
+                                                { "⭐️".repeat(  Number(  c.rating ) || 0 ) }
                                             </p>
 
                                         </div>
 
 
-                                        {/* ================================= */}
-                                        {/* قائمة صاحب التعليق فقط */}
-                                        {/* ================================= */}
-
-                                        {isOwner && (
+                                        {(isOwner || isAdmin) && (
 
                                             <div
                                                 style={{
@@ -891,12 +698,14 @@ console.log("COMMENTS FROM SERVER:", data);
 
                                                     display:
                                                         "inline-block",
-                                                        flexShrink:
+
+                                                    flexShrink:
                                                         0
                                                 }}
                                             >
 
                                                 <select
+
                                                     defaultValue=""
 
                                                     onChange={(
@@ -914,9 +723,7 @@ console.log("COMMENTS FROM SERVER:", data);
 
                                                             editComment(
                                                                 c._id,
-
                                                                 c.text,
-
                                                                 c.rating
                                                             );
                                                         }
@@ -936,16 +743,13 @@ console.log("COMMENTS FROM SERVER:", data);
                                                         e.target.value =
                                                             "";
                                                     }}
-
                                                     style={{
                                                         position:
                                                             "absolute",
 
-                                                        top:
-                                                            0,
+                                                        top: 0,
 
-                                                        left:
-                                                            0,
+                                                        left: 0,
 
                                                         width:
                                                             "30px",
@@ -953,14 +757,12 @@ console.log("COMMENTS FROM SERVER:", data);
                                                         height:
                                                             "30px",
 
-                                                        opacity:
-                                                            0,
+                                                        opacity: 0,
 
                                                         cursor:
                                                             "pointer",
 
-                                                        zIndex:
-                                                            2
+                                                        zIndex: 2
                                                     }}
                                                 >
 
@@ -969,25 +771,19 @@ console.log("COMMENTS FROM SERVER:", data);
                                                         hidden
                                                     >
                                                         {
-                                                            t(
-                                                                "menu"
-                                                            )
-                                                        }
-                                                    </option>
-                                                    <option value="edit">
-                                                        {
-                                                            t(
-                                                                "edit1"
-                                                            )
+                                                            t("menu")
                                                         }
                                                     </option>
 
+                                                    <option value="edit">
+                                                        {
+                                                            t("edit1")
+                                                        }
+                                                    </option>
 
                                                     <option value="delete">
                                                         {
-                                                            t(
-                                                                "delete"
-                                                            )
+                                                            t("delete")
                                                         }
                                                     </option>
 
@@ -1018,6 +814,7 @@ console.log("COMMENTS FROM SERVER:", data);
                                     </div>
 
                                 </div>
+
                             );
                         }
                     )}

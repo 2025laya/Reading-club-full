@@ -55,7 +55,6 @@ input{
 }
 .login{
   display: flex;
-  /* justify-content: center; */
   align-items: center;
   height: 125vh;
   background-color: #E9D5FF;

@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import i18n from "./i18n";
-
 import user3333 from "./images/user.png";
-
 import user1 from "./images/user1.png";
 import user2 from "./images/user2.png";
 import user3 from "./images/user3.png";
@@ -35,9 +33,7 @@ import user28 from "./images/user28.png";
 import user29 from "./images/user29.png";
 import user30 from "./images/user30.png";
 import user31 from "./images/user31.png";
-
 import Text from "./Text";
-
 const avatars = [
   user1, user2, user3, user4, user5,
   user6, user7, user8, user9,
@@ -48,11 +44,8 @@ const avatars = [
   user26, user27, user28, user29,
   user30, user31
 ];
-
 export default function Profile(props) {
-
   const { t } = useTranslation();
-
   const font =
     i18n.language === "ar"
       ? "elmesriRegular, sans-serif"
@@ -61,19 +54,13 @@ export default function Profile(props) {
       : i18n.language === "ko"
       ? "Dongle"
       : "playpen, sans-serif";
-
   const storedUser = JSON.parse(
     localStorage.getItem("user") || "{}"
   );
-
-  // إذا جئنا من EditAccount
   const editingAvatar =
     localStorage.getItem("editingAvatar");
-
-  // إذا جئنا من signup
   const pendingAvatar =
     localStorage.getItem("pendingAvatar");
-
   const initialAvatar =
     props.returnPage === "editAccount"
       ? (
@@ -89,56 +76,28 @@ export default function Profile(props) {
 
   const [avatar, setAvatar] =
     useState(initialAvatar);
-
-  // اختيار الصورة
   function chooseAvatar(index) {
-
     setAvatar(index);
-
   }
-
-  // حذف الصورة
   function removeAvatar() {
-
     setAvatar(null);
-
   }
-
-  // حفظ الصورة
 function saveAvatar() {
-
-  // =====================================
-  // جئنا من EditAccount
-  // =====================================
-
   if (props.returnPage === "editAccount") {
-
     if (avatar !== null) {
-
       localStorage.setItem(
         "editingAvatar",
         String(avatar)
       );
-
     } else {
-
       localStorage.removeItem(
         "editingAvatar"
       );
     }
-
-    // العودة إلى EditAccount
     props.setpage("editAccount");
-
     return;
   }
-
-  // =====================================
-  // جئنا من إنشاء الحساب
-  // =====================================
-
   if (avatar !== null) {
-
     localStorage.setItem(
       "pendingAvatar",
       String(avatar)
@@ -162,8 +121,6 @@ function saveAvatar() {
         marginTop: "3%"
       }}
     >
-
-      {/* الصورة الحالية */}
       <img
         src={
           avatar !== null
@@ -176,9 +133,6 @@ function saveAvatar() {
           borderRadius: "50%"
         }}
       />
-
-      {/* جميع الصور */}
-
       <div
         style={{
           display: "flex",
@@ -189,7 +143,6 @@ function saveAvatar() {
       >
 
         {avatars.map((img, index) => (
-
           <img
             key={index}
             src={img}
@@ -210,11 +163,7 @@ function saveAvatar() {
           />
 
         ))}
-
       </div>
-
-      {/* الأزرار */}
-
       <div
         style={{
           display: "flex",
@@ -222,9 +171,6 @@ function saveAvatar() {
           margin: "30px"
         }}
       >
-
-        {/* Save */}
-
         <button
           onClick={saveAvatar}
           className="login-button"
@@ -237,9 +183,6 @@ function saveAvatar() {
             {t("save")}
           </Text>
         </button>
-
-        {/* Remove */}
-
         <button
           className="login-button"
           onClick={removeAvatar}

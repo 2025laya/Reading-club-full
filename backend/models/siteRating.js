@@ -19,7 +19,6 @@ const siteRatingSchema =
                     true
             },
 
-
             rating: {
 
                 type:
@@ -35,7 +34,6 @@ const siteRatingSchema =
                     5
             }
         },
-
 
         {
             timestamps:

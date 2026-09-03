@@ -53,8 +53,6 @@ export default function Mypoint() {
 
   useEffect(() => {
     getPoints();
-
-    // تحديث النقاط عند العودة للصفحة
     const handleFocus = () => {
       getPoints();
     };

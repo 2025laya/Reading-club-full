@@ -5,7 +5,6 @@ const siteCommentSchema =
     new mongoose.Schema(
         {
             userId: {
-
                 type:
                     mongoose.Schema.Types.ObjectId,
 
@@ -16,9 +15,7 @@ const siteCommentSchema =
                     true
             },
 
-
             text: {
-
                 type:
                     String,
 
@@ -35,9 +32,7 @@ const siteCommentSchema =
                     ""
             },
 
-
             rating: {
-
                 type:
                     Number,
 
@@ -51,7 +46,6 @@ const siteCommentSchema =
                     5
             }
         },
-
 
         {
             timestamps:

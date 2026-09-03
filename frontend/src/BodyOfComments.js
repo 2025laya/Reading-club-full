@@ -1,28 +1,10 @@
-import React, {
-    useEffect,
-    useState
-} from "react";
-
+import React, {useEffect,useState} from "react";
 import Slider from "react-slick";
-
-import {
-    FontAwesomeIcon
-} from "@fortawesome/react-fontawesome";
-
-import {
-    faEllipsisVertical
-} from "@fortawesome/free-solid-svg-icons";
-
-import {
-    useTranslation
-} from "react-i18next";
-
-import {
-    motion
-} from "framer-motion";
-
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faEllipsisVertical} from "@fortawesome/free-solid-svg-icons";
+import {useTranslation} from "react-i18next";
+import {motion} from "framer-motion";
 import user3333 from "./images/user.png";
-
 import user1 from "./images/user1.png";
 import user2 from "./images/user2.png";
 import user3 from "./images/user3.png";
@@ -54,42 +36,16 @@ import user28 from "./images/user28.png";
 import user29 from "./images/user29.png";
 import user30 from "./images/user30.png";
 import user31 from "./images/user31.png";
-
 import Text from "./Text.js";
-
-
 const avatars = [
-    user1,
-    user2,
-    user3,
-    user4,
-    user5,
-    user6,
-    user7,
-    user8,
-    user9,
-    user10,
-    user11,
-    user12,
-    user13,
-    user14,
-    user15,
-    user16,
-    user17,
-    user18,
-    user19,
-    user20,
-    user21,
-    user22,
-    user23,
-    user24,
-    user25,
-    user26,
-    user27,
-    user28,
-    user29,
-    user30,
-    user31
+    user1,user2,user3,user4,
+    user5,user6,user7,user8,
+    user9,user10,user11,user12,
+    user13,user14,user15,user16,
+    user17,user18,user19,user20,
+    user21,user22,user23,user24,
+    user25,user26,user27,user28,
+    user29,user30,user31
 ];
 
 
@@ -106,11 +62,6 @@ export default function Comm({
         currentUser,
         setCurrentUser
     ] = useState(null);
-
-
-    // =====================================================
-    // جلب المستخدم الحالي
-    // =====================================================
     useEffect(() => {
 
         async function getCurrentUser() {
@@ -118,10 +69,7 @@ export default function Comm({
             try {
 
                 const token =
-                    localStorage.getItem(
-                        "token"
-                    );
-
+                    localStorage.getItem("token");
 
                 if (!token) {
                     return;
@@ -130,7 +78,7 @@ export default function Comm({
 
                 const response =
                     await fetch(
-                        "/api/me",
+                        "http://localhost:3000/api/me",
                         {
                             headers: {
                                 "x-auth-token":
@@ -167,11 +115,6 @@ export default function Comm({
         getCurrentUser();
 
     }, []);
-
-
-    // =====================================================
-    // جلب التعليقات من MongoDB
-    // =====================================================
     useEffect(() => {
 
         async function getComments() {
@@ -180,15 +123,20 @@ export default function Comm({
 
                 const response =
                     await fetch(
-                        "/api/site-comments"
+                        "http://localhost:3000/api/site-comments"
                     );
 
 
                 const data =
                     await response.json();
+                    console.log(
+                    "COMM COMMENTS:",
+                    data
+                );
 
 
                 if (response.ok) {
+
                     setComments(
                         Array.isArray(data)
                             ? data
@@ -209,11 +157,6 @@ export default function Comm({
         getComments();
 
     }, [setComments]);
-
-
-    // =====================================================
-    // تعديل
-    // =====================================================
     const editComment = async (
         commentId,
         oldText,
@@ -242,7 +185,9 @@ export default function Comm({
             rating > 5
         ) {
 
-            alert(t("enter"));
+            alert(
+                t("enter")
+            );
 
             return;
         }
@@ -283,9 +228,7 @@ export default function Comm({
         try {
 
             const token =
-                localStorage.getItem(
-                    "token"
-                );
+                localStorage.getItem("token");
 
 
             if (!token) {
@@ -295,7 +238,7 @@ export default function Comm({
 
             const response =
                 await fetch(
-                    `/api/site-comments/${commentId}`,
+                    `http://localhost:3000/api/site-comments/${commentId}`,
                     {
                         method: "PUT",
 
@@ -312,7 +255,8 @@ export default function Comm({
                                 text:
                                     finalText,
 
-                                rating
+                                rating:
+                                    rating
                             })
                     }
                 );
@@ -333,7 +277,6 @@ export default function Comm({
             }
 
 
-            // تحديث القائمة مباشرة
             setComments(
                 prev =>
                     prev.map(
@@ -358,11 +301,6 @@ export default function Comm({
             );
         }
     };
-
-
-    // =====================================================
-    // حذف
-    // =====================================================
     const deleteComment = async (
         commentId
     ) => {
@@ -381,21 +319,18 @@ export default function Comm({
         try {
 
             const token =
-                localStorage.getItem(
-                    "token"
-                );
+                localStorage.getItem("token");
 
 
             if (!token) {
                 return;
             }
-
-
             const response =
                 await fetch(
-                    `/api/site-comments/${commentId}`,
+                    `http://localhost:3000/api/site-comments/${commentId}`,
                     {
                         method: "DELETE",
+
                         headers: {
                             "x-auth-token":
                                 token
@@ -441,11 +376,6 @@ export default function Comm({
             );
         }
     };
-
-
-    // =====================================================
-    // Slider
-    // =====================================================
     const settings = {
 
         infinite: true,
@@ -459,6 +389,7 @@ export default function Comm({
         centerPadding: "20px",
 
         responsive: [
+
             {
                 breakpoint: 1000,
 
@@ -485,29 +416,21 @@ export default function Comm({
                         "5px"
                 }
             }
+
         ]
     };
-
-
-    // =====================================================
-    // آخر 16 تعليق
-    // =====================================================
     const data =
         [
             ...(comments || [])
         ]
             .slice(0, 16);
-
-
-    // =====================================================
-    // تقسيم
-    // =====================================================
     const chunk = (
         arr,
         size = 8
     ) => {
 
         const result = [];
+
 
         for (
             let i = 0;
@@ -523,12 +446,16 @@ export default function Comm({
             );
         }
 
+
         return result;
     };
 
 
     const pages =
-        chunk(data, 8);
+        chunk(
+            data,
+            8
+        );
 
 
     return (
@@ -566,7 +493,7 @@ export default function Comm({
 
                         <div
                             key={
-                                pageIndex
+                                `page-${pageIndex}`
                             }
                         >
 
@@ -581,12 +508,12 @@ export default function Comm({
                                         "30px"
                                 }}
                             >
-
-                                {page.map(
+                            {page.map(
                                     (
                                         c,
                                         i
                                     ) => {
+
                                         const owner =
                                             c.userId &&
                                             typeof c.userId ===
@@ -596,18 +523,15 @@ export default function Comm({
 
 
                                         const firstName =
-                                            owner?.name ||
-                                            "";
+                                            owner?.name || "";
 
 
                                         const lastName =
-                                            owner?.lastName ||
-                                            "";
+                                            owner?.lastName || "";
 
 
                                         const email =
-                                            owner?.email ||
-                                            "";
+                                            owner?.email || "";
 
 
                                         const senderName =
@@ -616,12 +540,9 @@ export default function Comm({
 
 
                                         const avatarIndex =
-                                            owner?.avatar !==
-                                                null &&
-                                            owner?.avatar !==
-                                                undefined &&
-                                            owner?.avatar !==
-                                                ""
+                                            owner?.avatar !== null &&
+                                            owner?.avatar !== undefined &&
+                                            owner?.avatar !== ""
                                                 ? Number(
                                                     owner.avatar
                                                 )
@@ -629,8 +550,7 @@ export default function Comm({
 
 
                                         const senderAvatar =
-                                            avatarIndex !==
-                                                null &&
+                                            avatarIndex !== null &&
                                             avatars[
                                                 avatarIndex
                                             ]
@@ -640,9 +560,6 @@ export default function Comm({
                                                 : user3333;
 
 
-                                        // =================================================
-                                        // هل المستخدم الحالي صاحب التعليق؟
-                                        // =================================================
                                         const isOwner =
                                             currentUser &&
                                             owner &&
@@ -652,15 +569,13 @@ export default function Comm({
                                             String(
                                                 owner._id
                                             );
-
+const isAdmin =
+    currentUser?.role === "admin";
 
                                         return (
 
                                             <div
-                                                key={
-                                                    c._id ||
-                                                    i
-                                                }
+                                                key={`${c._id}-${i}`}
 
                                                 className="comment-card"
                                             >
@@ -677,9 +592,6 @@ export default function Comm({
                                                             "start"
                                                     }}
                                                 >
-                                                    {/* ================================= */}
-                                                    {/* المستخدم */}
-                                                    {/* ================================= */}
 
                                                     <div
                                                         style={{
@@ -688,8 +600,7 @@ export default function Comm({
 
                                                             display:
                                                                 "flex",
-
-                                                            flexDirection:
+                                                          flexDirection:
                                                                 "column",
 
                                                             justifyContent:
@@ -753,7 +664,8 @@ export default function Comm({
 
                                                                         color:
                                                                             "#777",
-                                                                            marginTop:
+
+                                                                        marginTop:
                                                                             "5px"
                                                                     }}
                                                                 >
@@ -765,13 +677,7 @@ export default function Comm({
                                                             </div>
 
                                                         </div>
-
-
-                                                        {/* ================================= */}
-                                                        {/* التعليق */}
-                                                        {/* ================================= */}
-
-                                                        {c.text && (
+                                                     {c.text && (
 
                                                             <Text>
                                                                 {
@@ -781,10 +687,6 @@ export default function Comm({
 
                                                         )}
 
-
-                                                        {/* ================================= */}
-                                                        {/* النجوم */}
-                                                        {/* ================================= */}
 
                                                         <p>
                                                             {
@@ -799,11 +701,7 @@ export default function Comm({
                                                     </div>
 
 
-                                                    {/* ================================= */}
-                                                    {/* القائمة - لصاحب التعليق فقط */}
-                                                    {/* ================================= */}
-
-                                                    {isOwner && (
+                                                    {(isOwner||isAdmin) && (
 
                                                         <div
                                                             style={{
@@ -825,16 +723,16 @@ export default function Comm({
 
                                                                     const action =
                                                                         e.target.value;
-                                                                        if (
+
+
+                                                                    if (
                                                                         action ===
                                                                         "edit"
                                                                     ) {
 
                                                                         editComment(
                                                                             c._id,
-
                                                                             c.text,
-
                                                                             c.rating
                                                                         );
                                                                     }
@@ -854,16 +752,13 @@ export default function Comm({
                                                                     e.target.value =
                                                                         "";
                                                                 }}
-
-                                                                style={{
+                                                style={{
                                                                     position:
                                                                         "absolute",
 
-                                                                    top:
-                                                                        0,
+                                                                    top: 0,
 
-                                                                    left:
-                                                                        0,
+                                                                    left: 0,
 
                                                                     width:
                                                                         "30px",
@@ -871,14 +766,12 @@ export default function Comm({
                                                                     height:
                                                                         "30px",
 
-                                                                    opacity:
-                                                                        0,
+                                                                    opacity: 0,
 
                                                                     cursor:
                                                                         "pointer",
 
-                                                                    zIndex:
-                                                                        2
+                                                                    zIndex: 2
                                                                 }}
                                                             >
 
@@ -887,25 +780,21 @@ export default function Comm({
                                                                     hidden
                                                                 >
                                                                     {
-                                                                        t(
-                                                                            "menu"
-                                                                        )
+                                                                        t("menu")
                                                                     }
                                                                 </option>
+
+
                                                                 <option value="edit">
                                                                     {
-                                                                        t(
-                                                                            "edit1"
-                                                                        )
+                                                                        t("edit1")
                                                                     }
                                                                 </option>
 
 
                                                                 <option value="delete">
                                                                     {
-                                                                        t(
-                                                                            "delete"
-                                                                        )
+                                                                        t("delete")
                                                                     }
                                                                 </option>
 
@@ -936,6 +825,7 @@ export default function Comm({
                                                 </div>
 
                                             </div>
+
                                         );
                                     }
                                 )}
@@ -950,4 +840,4 @@ export default function Comm({
 
         </motion.div>
     );
-}
+}                         

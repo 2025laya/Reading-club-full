@@ -67,7 +67,6 @@ export default function Hero({ setpage, state }) {
             textAlign: "center",
             paddingLeft: "10%",
             paddingRight: "10%",
-            // transition: "0.3s",
           }}
         >
             <motion.span

@@ -3,9 +3,6 @@ import { useTranslation } from "react-i18next";
 import { QRCodeCanvas } from "qrcode.react";
 import "./TheBook.css";
 import Text from "./Text.js";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
-// import ReportForm from "./report.js";
 export default function TheBook({
   setpage,
   selectedBook,

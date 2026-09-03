@@ -60,11 +60,6 @@ const avatars = [
 ];
 export default function Chat({ setpage, state }) {
   const { t } = useTranslation();
-// const storedUser = JSON.parse(localStorage.getItem("user") || "null");
-
-// const [selectedAvatar, setSelectedAvatar] = useState(
-//   storedUser?.avatar != null ? Number(storedUser.avatar) : null
-// );
 
   const font =
     i18n.language === "ar"
@@ -473,7 +468,8 @@ export default function Chat({ setpage, state }) {
           const isMyMessage =
             currentUser &&
             senderId === currentUser._id;
-
+const isAdmin =
+    currentUser?.role === "admin";
           return (
             <div
               key={msg._id}
@@ -533,7 +529,7 @@ export default function Chat({ setpage, state }) {
                     </h4>
 
                
-                    {isMyMessage && (
+                    {(isMyMessage || isAdmin) && (
                       <div
                         style={{
                           position: "relative",
@@ -587,15 +583,15 @@ export default function Chat({ setpage, state }) {
                           }}
                         >
                           <option value="" hidden>
-                            menu
+                            {t("menu")}
                           </option>
 
                           <option value="edit">
-                            Edit
+                            {t("edit")}
                           </option>
 
                           <option value="delete">
-                            Delete
+                            {t("delete")}
                           </option>
                         </select>
                       </div>

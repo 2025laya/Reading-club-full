@@ -33,7 +33,7 @@ body.ko {
     font-size: 20px;
 }
 
-/* تحسين بسيط فقط للنصوص الكورية بدون تأثير على layout */
+
 body.ko * {
     line-height: 1.4;
 }

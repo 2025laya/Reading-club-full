@@ -36,105 +36,138 @@ export default function Sec4({
 
     const [rating, setRating] =
         useState(0);
-
-
-    // =====================================================
-    // زر الإرسال يكون معطلاً إذا:
-    //
-    // لا يوجد تقييم
-    //
-    // أو التقييم أقل من 5 ولا يوجد تعليق
-    // =====================================================
     const isDisabled =
         rating === 0 ||
         (
             rating < 5 &&
             text.trim() === ""
         );
+    async function handleSubmit() {
+
+        try {
+
+            const token =
+                localStorage.getItem("token");
 
 
-    // =====================================================
-    // إرسال التعليق
-    // =====================================================
-async function handleSubmit() {
-    try {
-        const token = localStorage.getItem("token");
+            if (!token) {
 
-        if (!token) {
-            alert("Please login first");
-            return;
-        }
+                alert(
+                    "Please login first"
+                );
 
-        if (rating === 0) {
-            return;
-        }
-
-        if (rating < 5 && !text.trim()) {
-            alert(t("writeReasonHere"));
-            return;
-        }
-
-        const commentResponse = await fetch(
-            `/api/site-comments`,
-            {
-                method: "POST",
-
-                headers: {
-                    "Content-Type": "application/json",
-                    "x-auth-token": token
-                },
-
-                body: JSON.stringify({
-                    text: rating < 5 ? text.trim() : "",
-                    rating: rating
-                })
+                return;
             }
-        );
 
-        const commentResult =
-            await commentResponse.json();
 
-        console.log(
-            "COMMENT RESPONSE:",
-            commentResult
-        );
+            if (rating === 0) {
+                return;
+            }
 
-        if (!commentResponse.ok) {
+
+            if (
+                rating < 5 &&
+                !text.trim()
+            ) {
+
+                alert(
+                    t("writeReasonHere")
+                );
+
+                return;
+            }
+
+
             console.log(
-                "COMMENT ERROR:",
+                "SENDING COMMENT..."
+            );
+
+
+            const commentResponse =
+                await fetch(
+                    "http://localhost:3000/api/site-comments",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json",
+
+                            "x-auth-token":
+                                token
+                        },
+
+                        body:
+                            JSON.stringify({
+                                text:
+                                    rating < 5
+                                        ? text.trim()
+                                        : "",
+
+                                rating:
+                                    rating
+                            })
+                    }
+                );
+
+
+            console.log(
+                "COMMENT STATUS:",
+                commentResponse.status
+            );
+
+
+            const commentResult =
+                await commentResponse.json();
+
+
+            console.log(
+                "COMMENT RESPONSE:",
                 commentResult
             );
 
-            alert(
-                commentResult.msg ||
-                "Comment error"
+
+            if (!commentResponse.ok) {
+
+                console.log(
+                    "COMMENT ERROR:",
+                    commentResult
+                );
+
+                alert(
+                    commentResult.msg ||
+                    "Comment error"
+                );
+
+                return;
+            }
+            if (
+                commentResult.comment &&
+                addComment
+            ) {
+
+                addComment(
+                    commentResult.comment
+                );
+            }
+
+
+            setText("");
+
+            setRating(0);
+
+
+            setpage("home");
+
+
+        } catch (err) {
+
+            console.error(
+                "SUBMIT ERROR:",
+                err
             );
-
-            return;
         }
-
-        if (
-            commentResult.comment &&
-            addComment
-        ) {
-            addComment(
-                commentResult.comment
-            );
-        }
-
-        setText("");
-        setRating(0);
-
-        setpage("home");
-
-    } catch (err) {
-        console.error(
-            "SUBMIT ERROR:",
-            err
-        );
     }
-}
-
 
     function go_to_home() {
 
@@ -143,16 +176,16 @@ async function handleSubmit() {
 
 
     return (
-
         <div className="headComment">
 
             <h1
                 style={{
                     fontFamily: font,
 
-                    color: state
-                        ? "#e2dfe4"
-                        : "#1E1B4B"
+                    color:
+                        state
+                            ? "#e2dfe4"
+                            : "#1E1B4B"
                 }}
             >
 
@@ -163,6 +196,7 @@ async function handleSubmit() {
                 <span
                     style={{
                         color: "#6366F1",
+
                         fontFamily: font
                     }}
                 >
@@ -176,18 +210,14 @@ async function handleSubmit() {
                 style={{
                     fontFamily: font,
 
-                    color: state
-                        ? "#e2dfe4"
-                        : "#1E1B4B"
+                    color:
+                        state
+                            ? "#e2dfe4"
+                            : "#1E1B4B"
                 }}
             >
                 {t("com4")} :
             </h4>
-
-
-            {/* ================================================= */}
-            {/* النجوم */}
-            {/* ================================================= */}
 
             <div>
 
@@ -202,6 +232,7 @@ async function handleSubmit() {
                                 setRating(star);
 
                                 if (star === 5) {
+
                                     setText("");
                                 }
 
@@ -226,11 +257,6 @@ async function handleSubmit() {
 
             </div>
 
-
-            {/* ================================================= */}
-            {/* التعليق */}
-            {/* ================================================= */}
-
             {rating > 0 &&
                 rating < 5 && (
 
@@ -240,9 +266,10 @@ async function handleSubmit() {
                             style={{
                                 fontFamily: font,
 
-                                color: state
-                                    ? "#e2dfe4"
-                                    : "#1E1B4B"
+                                color:
+                                    state
+                                        ? "#e2dfe4"
+                                        : "#1E1B4B"
                             }}
                         >
                             {t("com5")}
@@ -250,7 +277,9 @@ async function handleSubmit() {
 
 
                         <textarea
+
                             value={text}
+
                             onChange={(e) =>
                                 setText(
                                     e.target.value
@@ -285,15 +314,12 @@ async function handleSubmit() {
                                     "writeReasonHere"
                                 )
                             }
+
                         />
 
                     </div>
+
                 )}
-
-
-            {/* ================================================= */}
-            {/* الأزرار */}
-            {/* ================================================= */}
 
             <div
                 style={{
@@ -304,6 +330,7 @@ async function handleSubmit() {
             >
 
                 <button
+
                     disabled={isDisabled}
 
                     onClick={
@@ -326,7 +353,8 @@ async function handleSubmit() {
                                 ? "white"
                                 : "black",
 
-                        fontFamily: font
+                        fontFamily:
+                            font
                     }}
 
                     className="clickButt"
@@ -336,6 +364,7 @@ async function handleSubmit() {
 
 
                 <button
+
                     className="clickButt"
 
                     onClick={
@@ -343,7 +372,8 @@ async function handleSubmit() {
                     }
 
                     style={{
-                        fontFamily: font
+                        fontFamily:
+                            font
                     }}
                 >
                     {t("but2")}

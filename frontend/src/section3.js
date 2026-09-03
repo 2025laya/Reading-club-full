@@ -7,15 +7,12 @@ import { motion } from "framer-motion";
 import Text from "./Text";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
-
 import colorimg from "./images/colorimg.png";
 import blackimg from "./images/blackimg.png";
 import colorsave from "./images/savecolor.png";
 import blacksave from "./images/saveblack.png";
-
 import "swiper/css";
 import "swiper/css/pagination";
-
 export default function Sec3({
   state,
   setpage,
@@ -24,7 +21,6 @@ export default function Sec3({
   setHasSearched
 }) {
   const { t } = useTranslation();
-
   const font =
     i18n.language === "ar"
       ? "elmesriRegular, sans-serif"
@@ -33,100 +29,59 @@ export default function Sec3({
       : i18n.language === "ko"
       ? "Dongle"
       : "playpen, sans-serif";
-
   const currentDir = i18n.language === "ar" ? "rtl" : "ltr";
-
   const [books, setBooks] = useState([]);
-
   const [love, setLove] = useState({});
   const [save, setSave] = useState({});
-
   const [searchType, setSearchType] = useState("");
   const [searchValue, setSearchValue] = useState("");
-
-  // const [hasSearched, setHasSearched] = useState(false);
   const [filteredBooks, setFilteredBooks] = useState([]);
-
-  // ==========================================
-  // جلب جميع الكتب
-  // ==========================================
-
   useEffect(() => {
     async function fetchBooks() {
       try {
         const response = await fetch(
           "http://localhost:3000/api/books"
         );
-
         if (!response.ok) {
           throw new Error("Failed to fetch books");
         }
-
         const data = await response.json();
-
         let booksData = [];
-
         if (Array.isArray(data)) {
           booksData = data;
         } else if (Array.isArray(data.books)) {
           booksData = data.books;
         }
-
        setBooks(booksData);
-setFilteredBooks(booksData);
-
+       setFilteredBooks(booksData);
 if (setSearchResults) {
   setSearchResults(booksData);
 }
-
 if (setHasSearched) {
   setHasSearched(false);
 }
-
       } catch (error) {
         console.error("Error fetching books:", error);
         setBooks([]);
         setFilteredBooks([]);
       }
       console.log("Books From Backend");
-
     }
-
     fetchBooks();
   }, [setSearchResults]);
-
-  // ==========================================
-  // البحث
-  // ==========================================
 function handleSearch(event) {
-
   let value = event.target.value;
-
-  // =====================================
-  // البحث حسب المؤلف
-  // =====================================
-
   if (searchType === "author") {
-
     setSearchValue(value);
-
     const text = value.trim().toLowerCase();
-
-    // لم يتم البحث
     if (text === "") {
-
       setHasSearched(false);
-
       setFilteredBooks(books);
-
       if (setSearchResults) {
         setSearchResults(books);
       }
-
       return;
     }
-
-    // تم بدء البحث
     setHasSearched(true);
 
     const results = books.filter((book) => {
@@ -165,65 +120,39 @@ function handleSearch(event) {
     return;
   }
 
-
-  // =====================================
-  // البحث حسب السنة
-  // =====================================
-
   if (searchType === "year") {
 
     value = value
       .replace(/[^0-9]/g, "")
       .slice(0, 4);
-
     setSearchValue(value);
-
-    // لم تكتمل السنة
     if (value.length < 4) {
-
       setHasSearched(false);
-
       setFilteredBooks(books);
-
       if (setSearchResults) {
         setSearchResults(books);
       }
-
       return;
     }
-
-    // تم البحث
     setHasSearched(true);
-
     const results = books.filter((book) => {
-
       if (!book.published) {
         return false;
       }
-
       const published =
         String(book.published);
-
       const year =
         published.substring(0, 4);
-
       return year === value;
-
     });
-
     setFilteredBooks(results);
-
     if (setSearchResults) {
       setSearchResults(results);
     }
-
   }
 }
-
 function changeSearchType(event) {
-
   const type = event.target.value;
-
   setSearchType(type);
   setSearchValue("");
 
@@ -246,10 +175,6 @@ function changeSearchType(event) {
     setpage("viewAll1");
   }
 
-  // ==========================================
-  // View All القديم
-  // ==========================================
-
 function viewAll() {
 
   if (setSearchResults) {
@@ -258,19 +183,10 @@ function viewAll() {
 
   setpage("viewAll1");
 }
-
-  // ==========================================
-  // فتح الكتاب
-  // ==========================================
-
   function goToBook(book) {
     setSelectedBook(book);
     setpage("TheBook");
   }
-
-  // ==========================================
-  // Like
-  // ==========================================
 
   async function isLove(bookId) {
 
@@ -293,10 +209,6 @@ function viewAll() {
     }
   }
 
-  // ==========================================
-  // Save
-  // ==========================================
-
   function isSave(bookId) {
 
     setSave((previous) => ({
@@ -304,10 +216,6 @@ function viewAll() {
       [bookId]: !previous[bookId]
     }));
   }
-
-  // ==========================================
-  // LocalStorage
-  // ==========================================
 
   useEffect(() => {
 
@@ -330,17 +238,7 @@ function viewAll() {
     );
 
   }, [love, save, books]);
-
-  // ==========================================
-  // أول 9 كتب فقط في Section 3
-  // ==========================================
-
   const visibleBooks = filteredBooks.slice(0, 9);
-
-  // ==========================================
-  // هل بدأ البحث؟
-  // ==========================================
-
   const canSearch =
     (
       searchType === "author" &&
@@ -354,10 +252,6 @@ function viewAll() {
   return (
 
     <div>
-
-      {/* =====================================
-          العنوان
-      ===================================== */}
 
       <div className="title3">
 
@@ -383,8 +277,6 @@ function viewAll() {
           >
             {t("classify")} :
           </motion.h2>
-
-          {/* Select */}
           <motion.select
             initial={{
               opacity: 0,
@@ -433,11 +325,6 @@ function viewAll() {
             </option>
 
           </motion.select>
-
-          {/* =================================
-              خانة البحث
-          ================================= */}
-
           {searchType && (
 
             <input
@@ -473,9 +360,6 @@ function viewAll() {
           )}
 
         </div>
-
-        {/* View All القديم */}
-
         <motion.a
           initial={{
             opacity: 0,
@@ -513,10 +397,6 @@ function viewAll() {
         </motion.a>
 
       </div>
-
-      {/* =====================================
-          نتائج البحث
-      ===================================== */}
 
       {canSearch && (
 

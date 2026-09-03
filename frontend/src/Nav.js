@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMoon, faSun, faTrophy,faHandHoldingHeart,faBookBookmark , faFileCircleExclamation} from "@fortawesome/free-solid-svg-icons";
+import { faMoon, faSun, faTrophy,faBookBookmark , faFileCircleExclamation} from "@fortawesome/free-solid-svg-icons";
 import "./Section1";
 import "./nav.css";
 import RPage from "./rightPage.js";
@@ -9,7 +9,6 @@ import i18n from "./i18n";
 import Report from "./report";
 export default function Nav({ setpage, setstate, state }) {
   const { t } = useTranslation();
-  const [open, setOpen] = useState(false);
   const font = i18n.language === "ar" ? 
   "elmesriRegular, sans-serif" :
    i18n.language==="zh" || i18n.language==="ja" ? "zheng":
@@ -23,8 +22,6 @@ export default function Nav({ setpage, setstate, state }) {
   function goToHome() {
     setpage("home");
   }
-
-
   function gotosignup() {
     setpage("signup");
   }
@@ -148,9 +145,6 @@ export default function Nav({ setpage, setstate, state }) {
                   {t("signUp")}
                 </button>
               </li>
-              {/* <li className="nav-item">
-                
-              </li> */}
               <li className="nav-item">
                 <select
                   className="nav-link"

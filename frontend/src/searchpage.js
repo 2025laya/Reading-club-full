@@ -66,13 +66,11 @@ export default function Searchpage({setpage,state,books,
               >
                 {t("oops")}
               </span>{" "}
-              {/* <br></br> */}
               <p style={{fontFamily:font , color:state?   "#eaddf9":"#1D1845" }}>
                 {t("noResultsFound")}
               </p>
             
             <div style={{display:"flex"}}>
-                {/* <img src={arrow} alt="arrow" style={{ width:"7%",display:"block"}} /> */}
             <button onClick={gotohome} style={{paddingLeft:"10px", paddingRight:"10px",backgroundColor:state? "#b422a0" : "#f9a2ed",border: "none",borderRadius:"25px",boxShadow:" 0px 2px 7px 0px #17153a",marginTop:"27px" , fontFamily:font , color : state ?  "#eaddf9" : "#1D1845" }}>{t("but2")}</button>
             </div>
            
@@ -113,8 +111,6 @@ export default function Searchpage({setpage,state,books,
   </div>
   
 </div>
-      {/* <button onClick={gotohome} style={{paddingLeft:"10px", paddingRight:"10px",backgroundColor:state? "#b422a0" : "#f9a2ed",border: "none",borderRadius:"25px",boxShadow:" 0px 2px 7px 0px #17153a",marginTop:"27px" , fontFamily:font , color : state ?  "#eaddf9" : "#1D1845" }}>{t("but2")}</button>   */}
-       
         </div>
       
         

@@ -50,9 +50,7 @@ const avatars = [
 ];
 
 export default function EditAccount(props) {
-
   const { t } = useTranslation();
-
   const font =
     i18n.language === "ar"
       ? "elmesriRegular, sans-serif"
@@ -61,36 +59,13 @@ export default function EditAccount(props) {
       : i18n.language === "ko"
       ? "Dongle"
       : "playpen, sans-serif";
-
-  // المستخدم الحالي
-  const storedUser = JSON.parse(
-    localStorage.getItem("user") || "{}"
-  );
-
-  // =========================
-  // بيانات الحساب الحالي
-  // =========================
-
-  const [name, setName] = useState(
-    storedUser.name || ""
-  );
-
-  const [lastName, setLastName] = useState(
-    storedUser.lastName || ""
-  );
-
-  const [email, setEmail] = useState(
-    storedUser.email || ""
-  );
-
+  const storedUser = JSON.parse(localStorage.getItem("user") || "{}");
+  const [name, setName] = useState(storedUser.name || "");
+  const [lastName, setLastName] = useState(storedUser.lastName || "");
+  const [email, setEmail] = useState(storedUser.email || "");
   const [password, setPassword] = useState("");
-
-  // الصورة الحالية
-  const savedEditingAvatar =
-    localStorage.getItem("editingAvatar");
-
-  const [avatar, setAvatar] = useState(
-    savedEditingAvatar !== null
+  const savedEditingAvatar = localStorage.getItem("editingAvatar");
+  const [avatar, setAvatar] = useState( savedEditingAvatar !== null
       ? Number(savedEditingAvatar)
       : (
           storedUser.avatar !== null &&
@@ -100,38 +75,22 @@ export default function EditAccount(props) {
             : null
         )
   );
-
-  // =========================
-  // فتح صفحة اختيار الصورة
-  // =========================
-
   function openProfile() {
-
-    // نحفظ الصورة الحالية مؤقتًا
     if (avatar !== null) {
-
       localStorage.setItem(
         "editingAvatar",
         String(avatar)
       );
-
     } else {
-
       localStorage.removeItem(
         "editingAvatar"
       );
     }
 
-    // Profile تعرف أنها جاءت من EditAccount
     props.setProfileReturnPage("editAccount");
 
-    // الانتقال إلى صفحة الصور
     props.setpage("profile");
   }
-
-  // =========================
-  // حفظ جميع التعديلات
-  // =========================
 
   async function saveChanges(event) {
 
@@ -151,12 +110,6 @@ export default function EditAccount(props) {
 
       return;
     }
-
-    // ==========================================
-    // مهم جدًا:
-    // نأخذ آخر Avatar من localStorage
-    // لأن Profile قد تكون غيرت الصورة
-    // ==========================================
     const savedAvatar =
       localStorage.getItem("editingAvatar");
 
@@ -165,8 +118,6 @@ export default function EditAccount(props) {
     if (savedAvatar !== null) {
       finalAvatar = Number(savedAvatar);
     }
-
-    // البيانات التي سنرسلها للسيرفر
     const data = {
       name: name,
       lastName: lastName,
@@ -174,7 +125,6 @@ export default function EditAccount(props) {
       avatar: finalAvatar
     };
 
-    // كلمة المرور اختيارية
     if (password.trim() !== "") {
       data.password = password;
     }
@@ -217,39 +167,22 @@ export default function EditAccount(props) {
 
         return;
       }
-
-      // ==========================================
-      // المستخدم الذي أعاده السيرفر
-      // ==========================================
-
       const updatedUser = {
         ...storedUser,
         ...result.user,
-
-        // نضمن حفظ الصورة الجديدة
         avatar: finalAvatar,
-
-        // نضمن حفظ البيانات الجديدة
         name: name,
         lastName: lastName,
         email: email
       };
-
-      // حفظ المستخدم الجديد
       localStorage.setItem(
         "user",
         JSON.stringify(updatedUser)
       );
-
-      // تنظيف الصورة المؤقتة
       localStorage.removeItem(
         "editingAvatar"
       );
-
-      // تنظيف كلمة المرور
       setPassword("");
-
-      // تحديث App إذا كان setUser موجودًا
       if (props.setUser) {
         props.setUser(updatedUser);
       }
@@ -267,8 +200,6 @@ export default function EditAccount(props) {
         confirmButtonColor: "#3085d6",
         timer: 1200
       }).then(() => {
-
-        // بعد الحفظ نعود للصفحة الرئيسية
         props.setpage("home");
 
       });
@@ -288,18 +219,11 @@ export default function EditAccount(props) {
       });
     }
   }
-
-  // =========================
-  // إلغاء
-  // =========================
-
   function cancelEdit() {
 
     localStorage.removeItem(
       "editingAvatar"
     );
-
-    // العودة إلى صفحة إنشاء الحساب
     props.setpage("signup");
   }
 
@@ -329,13 +253,8 @@ export default function EditAccount(props) {
             marginBottom: "20px"
           }}
         >
-          تعديل الحساب
+         {t("editAccount")}
         </h2>
-
-        {/* =========================
-            الصورة الحالية
-        ========================= */}
-
         <img
           src={
             avatar !== null &&
@@ -352,8 +271,6 @@ export default function EditAccount(props) {
             objectFit: "cover"
           }}
         />
-
-        {/* تغيير الصورة */}
         <button
           type="button"
           className="login-button"
@@ -363,17 +280,9 @@ export default function EditAccount(props) {
           }}
           onClick={openProfile}
         >
-          تغيير الصورة
+          {t("changePicture")}
         </button>
-
-        {/* =========================
-            نموذج تعديل الحساب
-        ========================= */}
-
         <form onSubmit={saveChanges}>
-
-          {/* الاسم والكنية */}
-
           <div className="forminput">
 
             <input
@@ -403,9 +312,6 @@ export default function EditAccount(props) {
             />
 
           </div>
-
-          {/* البريد الإلكتروني */}
-
           <div className="forminput">
 
             <input
@@ -422,9 +328,6 @@ export default function EditAccount(props) {
             />
 
           </div>
-
-          {/* كلمة المرور */}
-
           <div className="forminput">
 
             <input
@@ -440,11 +343,6 @@ export default function EditAccount(props) {
             />
 
           </div>
-
-          {/* =========================
-              الأزرار
-          ========================= */}
-
           <div
             style={{
               display: "flex",
@@ -462,7 +360,7 @@ export default function EditAccount(props) {
                 fontFamily: font
               }}
             >
-              موافق
+            {t("ok")}
             </button>
 
             <button
@@ -473,7 +371,7 @@ export default function EditAccount(props) {
               }}
               onClick={cancelEdit}
             >
-              إلغاء
+              {t("cancel")}
             </button>
 
           </div>

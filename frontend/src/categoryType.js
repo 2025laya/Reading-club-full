@@ -177,7 +177,7 @@ export default function CategoryType({
               fontSize: "20px",
             }}
           >
-            No books found
+            {t("noBooksFound")}
           </p>
         )}
       </div>

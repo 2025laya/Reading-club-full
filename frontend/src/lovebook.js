@@ -1,23 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
 import { useTranslation } from "react-i18next";
 import i18n from "./i18n";
 import Text from "./Text";
-import colorimg from "./images/colorimg.png";
-import blackimg from "./images/blackimg.png";
-import colorsave from "./images/savecolor.png";
-import blacksave from "./images/saveblack.png";
 import "./section3.css";
 import blob from "./images/low.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faHeartPulse,
-  faBookmark,
-  faStarHalfStroke,
-} from "@fortawesome/free-solid-svg-icons";
-
-
+import {faStarHalfStroke,} from "@fortawesome/free-solid-svg-icons";
 export default function Lovebook() {
   const { t } = useTranslation();
     const font = i18n.language === "ar" ? 

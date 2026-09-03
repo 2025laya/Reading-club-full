@@ -1,17 +1,7 @@
-import React, {
-    useEffect,
-    useState
-} from "react";
-
+import React, {useEffect,useState} from "react";
 import axios from "axios";
-
 import "./report.css";
-
-
-function Report({
-    onClose,
-    targetType: initialType = ""
-}) {
+function Report({onClose,targetType: initialType = ""}) {
 
     const [targetType, setTargetType] =
         useState(initialType);

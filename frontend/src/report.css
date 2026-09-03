@@ -41,11 +41,6 @@
     font-size: 14px;
     margin-bottom: 20px;
 }
-
-/* =========================
-   اختيار نوع البلاغ
-========================= */
-
 .report-type-selection {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -102,10 +97,6 @@
     color: white;
 }
 
-/* =========================
-   العنصر المبلّغ عنه
-========================= */
-
 .report-target {
     display: flex;
     align-items: center;
@@ -140,10 +131,6 @@
     white-space: nowrap;
 }
 
-/* =========================
-   textarea
-========================= */
-
 .report-box label {
     display: block;
 
@@ -175,10 +162,6 @@
     border-color: #555;
 }
 
-/* =========================
-   إرسال
-========================= */
-
 .send-report {
     width: 100%;
 
@@ -206,11 +189,6 @@
 
     cursor: not-allowed;
 }
-
-/* =========================
-   إغلاق
-========================= */
-
 .report-close {
     position: absolute;
 

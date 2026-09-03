@@ -1,8 +1,19 @@
 import React from 'react';
 import Swal from 'sweetalert2';
-
+import { useTranslation } from "react-i18next";
+import i18n from "./i18n";
 export default function Logout(props) {
-  
+   const { t } = useTranslation();
+
+  const font =
+    i18n.language === "ar"
+      ? "elmesriRegular, sans-serif"
+      : i18n.language === "zh" || i18n.language === "ja"
+      ? "zheng"
+      : i18n.language === "ko"
+      ? "Dongle"
+      : "playpen, sans-serif";
+
   async function gotodelete() {
     const token = localStorage.getItem('token'); 
 
@@ -95,7 +106,7 @@ export default function Logout(props) {
         fontFamily: "playpen, sans-serif",
       }}
     >
-      <h3>Do you want to Delete Account?</h3>
+      <h3>{t("deleteAccountConfirm")}</h3>
       <div style={{ display: "flex", gap: "40px", marginTop: "30px" }}>
         
         <button
@@ -114,7 +125,7 @@ export default function Logout(props) {
             cursor: "pointer"
           }}
         >
-          Confirm
+          {t("confirm")}
         </button>
 
         <button
@@ -133,7 +144,7 @@ export default function Logout(props) {
             cursor: "pointer"
           }}
         >
-          Cancel
+          {t("cancel")}
         </button>
       </div>
     </div>
